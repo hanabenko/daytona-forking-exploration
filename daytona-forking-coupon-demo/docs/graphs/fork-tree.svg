@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Coupon Debugging Multi-Level Fork Tree</title>
+  <desc id="desc">A prepared parent branches into hypotheses; the winning contract branch writes state before deeper forks.</desc>
+  <style>
+    .bg { fill: #0a0a0a; }
+    .panel { fill: #161616; stroke: #414141; stroke-width: 1.5; rx: 8; }
+    .ink { fill: #ffffff; font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .muted { fill: #a2a2a2; font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .title { font-size: 34px; font-weight: 800; letter-spacing: 0; }
+    .subtitle { font-size: 16px; letter-spacing: 0; }
+    .label { font-size: 16px; font-weight: 800; letter-spacing: 0; }
+    .small { font-size: 13px; letter-spacing: 0; }
+    .tiny { font-size: 11px; letter-spacing: 0; }
+    .line { stroke: #414141; stroke-width: 2; fill: none; }
+    .blue { fill: #2ecc71; }
+    .green { fill: #00e49a; }
+    .amber { fill: #f1c40f; }
+    .red { fill: #e74c3c; }
+    .soft-blue { fill: #102017; stroke: #2ecc71; }
+    .soft-green { fill: #102017; stroke: #2ecc71; }
+    .soft-amber { fill: #211d0f; stroke: #f1c40f; }
+    .soft-red { fill: #211013; stroke: #e74c3c; }
+    .soft-gray { fill: #111111; stroke: #414141; }
+  </style>
+  <rect class="bg" width="1200" height="720"/>
+  <text class="ink title" x="56" y="58">Coupon Debugging Multi-Level Fork Tree</text>
+  <text class="muted subtitle" x="56" y="88">A prepared parent branches into hypotheses; the winning contract branch writes state before deeper forks.</text>
+  <path class="line" d="M600 176 C600 222 170 222 170 255"/>
+  <path class="line" d="M600 176 C600 222 430 222 430 255"/>
+  <path class="line" d="M600 176 C600 222 690 222 690 255"/>
+  <path class="line" d="M780 307 C780 334 780 334 780 354"/>
+  <path class="line" d="M780 307 C780 390 580 390 580 438"/>
+  <path class="line" d="M780 307 C780 390 820 390 820 438"/>
+  <path class="line" d="M780 406 C780 486 165 486 165 538"/>
+  <path class="line" d="M780 406 C780 486 375 486 375 538"/>
+  <path class="line" d="M780 406 C780 486 585 486 585 538"/>
+  <path class="line" d="M780 406 C780 486 795 486 795 538"/>
+  <rect class="panel soft-blue" x="500" y="124" width="200" height="52" rx="8"/>
+  <foreignObject x="510" y="134" width="180" height="34">
+    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #ffffff; font-size: 12px; font-weight: 800; line-height: 1.2; text-align: center; overflow-wrap: anywhere;">coupon-parent-prepared</div>
+  </foreignObject>
+  <rect class="panel soft-amber" x="80" y="255" width="180" height="52" rx="8"/>
+  <foreignObject x="90" y="265" width="160" height="34">
+    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #ffffff; font-size: 12px; font-weight: 800; line-height: 1.2; text-align: center; overflow-wrap: anywhere;">frontend-hypothesis</div>
+  </foreignObject>
+  <rect class="panel soft-amber" x="340" y="255" width="180" height="52" rx="8"/>
+  <foreignObject x="350" y="265" width="160" height="34">
+    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #ffffff; font-size: 12px; font-weight: 800; line-height: 1.2; text-align: center; overflow-wrap: anywhere;">backend-hypothesis</div>
+  </foreignObject>
+  <rect class="panel soft-green" x="600" y="255" width="180" height="52" rx="8"/>
+  <foreignObject x="610" y="265" width="160" height="34">
+    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #ffffff; font-size: 12px; font-weight: 800; line-height: 1.2; text-align: center; overflow-wrap: anywhere;">contract-hypothesis</div>
+  </foreignObject>
+  <rect class="panel soft-green" x="680" y="354" width="200" height="52" rx="8"/>
+  <foreignObject x="690" y="364" width="180" height="34">
+    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #ffffff; font-size: 12px; font-weight: 800; line-height: 1.2; text-align: center; overflow-wrap: anywhere;">contract-candidate-fix</div>
+  </foreignObject>
+  <rect class="panel soft-green" x="490" y="438" width="180" height="52" rx="8"/>
+  <foreignObject x="500" y="448" width="160" height="34">
+    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #ffffff; font-size: 12px; font-weight: 800; line-height: 1.2; text-align: center; overflow-wrap: anywhere;">contract-minimal</div>
+  </foreignObject>
+  <rect class="panel soft-green" x="730" y="438" width="220" height="52" rx="8"/>
+  <foreignObject x="740" y="448" width="200" height="34">
+    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #ffffff; font-size: 12px; font-weight: 800; line-height: 1.2; text-align: center; overflow-wrap: anywhere;">contract-with-regression-test</div>
+  </foreignObject>
+  <rect class="panel soft-gray" x="75" y="538" width="180" height="52" rx="8"/>
+  <foreignObject x="85" y="548" width="160" height="34">
+    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #ffffff; font-size: 12px; font-weight: 800; line-height: 1.2; text-align: center; overflow-wrap: anywhere;">api-design-review</div>
+  </foreignObject>
+  <rect class="panel soft-gray" x="285" y="538" width="180" height="52" rx="8"/>
+  <foreignObject x="295" y="548" width="160" height="34">
+    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #ffffff; font-size: 12px; font-weight: 800; line-height: 1.2; text-align: center; overflow-wrap: anywhere;">implementation-review</div>
+  </foreignObject>
+  <rect class="panel soft-gray" x="495" y="538" width="180" height="52" rx="8"/>
+  <foreignObject x="505" y="548" width="160" height="34">
+    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #ffffff; font-size: 12px; font-weight: 800; line-height: 1.2; text-align: center; overflow-wrap: anywhere;">regression-test-builder</div>
+  </foreignObject>
+  <rect class="panel soft-gray" x="705" y="538" width="180" height="52" rx="8"/>
+  <foreignObject x="715" y="548" width="160" height="34">
+    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #ffffff; font-size: 12px; font-weight: 800; line-height: 1.2; text-align: center; overflow-wrap: anywhere;">memory-state-check</div>
+  </foreignObject>
+  <text class="ink label" x="80" y="645">Multi-level point</text>
+  <text class="muted small" x="80" y="674">The contract branch writes a candidate fix, then becomes the parent for validators and refinements.</text>
+</svg>

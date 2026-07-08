@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Guide Insert: State Semantics</title>
+    <link rel="stylesheet" href="../../../src/client/styles.css" />
+    <link rel="stylesheet" href="../../../src/client/forking-demo.css" />
+    <style>
+      body { background: #0a0a0a; }
+      .guide-shot {
+        width: 1040px !important;
+        max-width: 1040px !important;
+        margin: 0 auto !important;
+        padding: 24px !important;
+      }
+      .guide-shot .topbar { display: flex; margin-bottom: 18px; }
+      .guide-shot .topbar nav { display: none; }
+      .guide-shot .topbar h1 { max-width: 900px; font-size: 38px; }
+      .guide-shot .repro-workbench { margin-top: 0; }
+      .guide-shot .operator-console-panel.simple-hypothesis-panel { margin-top: 16px; }
+      .guide-shot h1,
+      .guide-shot h2,
+      .guide-shot h3,
+      .guide-shot p,
+      .guide-shot strong,
+      .guide-shot span {
+        min-width: 0;
+        overflow-wrap: anywhere;
+      }
+      .guide-shot .terminal-tags { padding: 0; }
+      .guide-shot .terminal-tags span {
+        color: #00e49a;
+        background: #111111;
+        border-color: #414141;
+      }
+      .guide-shot .pill {
+        display: inline-flex;
+        width: fit-content;
+        padding: 4px 8px;
+        border: 1px solid #414141;
+        border-radius: 999px;
+        color: #00e49a;
+        background: #111111;
+        font-size: 11px;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+      .guide-card {
+        min-width: 0;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+        padding: 18px;
+      }
+      .guide-terminal {
+        min-width: 0;
+        overflow: hidden;
+        border: 1px solid #334155;
+        border-radius: 8px;
+        background: #111827;
+      }
+      .guide-terminal header {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 10px 12px;
+        color: #cbd5e1;
+        background: #172033;
+        font-size: 12px;
+        font-weight: 900;
+      }
+      .guide-terminal pre {
+        margin: 0;
+        padding: 16px;
+        color: #fafafa;
+        font: 12px/1.45 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+      }
+      .guide-state-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 320px;
+        gap: 16px;
+      }
+      .guide-checklist {
+        display: grid;
+        gap: 10px;
+      }
+      .guide-check {
+        min-width: 0;
+        display: grid;
+        grid-template-columns: 12px minmax(0, 1fr) 26px;
+        gap: 10px;
+        align-items: center;
+        padding: 10px 12px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+      }
+      .guide-check .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        background: var(--green);
+      }
+      .guide-check strong { font-size: 13px; }
+      .guide-check span:last-child { color: var(--green); font-size: 12px; font-weight: 900; }
+      .guide-fork-tree {
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        grid-template-rows: repeat(3, minmax(128px, auto));
+        gap: 24px 14px;
+        min-height: 520px;
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #111111;
+      }
+      .guide-fork-tree .node { min-height: 126px; box-shadow: none; }
+      .guide-fork-tree .node.parent { grid-column: 3 / span 2; grid-row: 1; }
+      .guide-fork-tree .node.frontend-hypothesis { grid-column: 1 / span 2; grid-row: 2; }
+      .guide-fork-tree .node.backend-hypothesis { grid-column: 3 / span 2; grid-row: 2; }
+      .guide-fork-tree .node.contract-hypothesis { grid-column: 5 / span 2; grid-row: 2; }
+      .guide-fork-tree .node.contract-minimal { grid-column: 4 / span 2; grid-row: 3; }
+      .guide-fork-tree .node.contract-with-regression-test { grid-column: 6 / span 1; grid-row: 3; }
+      .guide-level-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .guide-level {
+        min-width: 0;
+        display: grid;
+        grid-template-columns: 220px minmax(0, 1fr);
+        gap: 12px;
+        align-items: start;
+        padding: 14px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+      }
+      .guide-level header {
+        display: grid;
+        grid-template-columns: 36px 1fr;
+        gap: 8px;
+        align-items: start;
+        margin-bottom: 0;
+      }
+      .guide-level-number {
+        display: grid;
+        width: 36px;
+        height: 36px;
+        place-items: center;
+        border-radius: 999px;
+        color: #06140d;
+        background: var(--blue);
+        font-size: 12px;
+        font-weight: 900;
+      }
+      .guide-level header h2 {
+        margin: 0 0 5px;
+        font-size: 16px;
+      }
+      .guide-level header p {
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.35;
+      }
+      .guide-level-nodes {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 10px;
+      }
+      .guide-level-node {
+        display: grid;
+        gap: 8px;
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #111111;
+      }
+      .guide-level-node.prepared,
+      .guide-level-node.changed {
+        border-color: var(--green);
+        background: color-mix(in srgb, var(--green) 13%, var(--panel));
+      }
+      .guide-level-node strong {
+        font-size: 14px;
+      }
+      .guide-level-node p {
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.35;
+      }
+      .guide-level-arrow {
+        grid-column: 2;
+        margin: 0;
+        color: var(--muted);
+        font: 18px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        text-align: left;
+      }
+      .guide-semantic-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+      .guide-semantic-grid img {
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+      }
+      
+    </style>
+  </head>
+  <body>
+    <main class="console unified-console guide-shot"><header class="topbar">
+    <div>
+      <p class="eyebrow">Lifecycle semantics</p>
+      <h1>Different Operations Preserve Different State</h1>
+    </div>
+  </header>
+      <section class="guide-semantic-grid">
+        <img src="../../../docs/graphs/state-layers.svg" alt="State layers" />
+        <img src="../../../docs/graphs/lifecycle-comparison.svg" alt="Lifecycle comparison" />
+      </section>
+      <section class="operator-console-panel simple-hypothesis-panel" style="margin-top:16px">
+        <div class="terminal-split-grid">
+          <article class="hypothesis-card">
+            <span class="pill">stop/start</span>
+            <h3>Same sandbox</h3>
+            <p class="hypothesis-focus">Filesystem state persists.</p>
+            <p>Running processes should not be treated as preserved.</p>
+          </article>
+          <article class="hypothesis-card">
+            <span class="pill">fork</span>
+            <h3>New sandbox</h3>
+            <p class="hypothesis-focus">Independent future from the fork point.</p>
+            <p>Children start with the prepared parent state, then diverge.</p>
+          </article>
+          <article class="hypothesis-card">
+            <span class="pill">snapshot</span>
+            <h3>Reusable baseline</h3>
+            <p class="hypothesis-focus">Saved checkpoint for later creation.</p>
+            <p>Not the same as an immediate active child sandbox.</p>
+          </article>
+        </div>
+      </section></main>
+  </body>
+</html>

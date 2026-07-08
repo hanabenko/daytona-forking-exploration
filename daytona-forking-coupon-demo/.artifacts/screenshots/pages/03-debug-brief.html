@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Debug Brief</title>
+    <style>
+      body { margin: 0; background: #f6f7f9; color: #1e2430; font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      main { width: 1120px; margin: 0 auto; padding: 36px; }
+      h1 { margin: 0 0 10px; font-size: 32px; letter-spacing: 0; }
+      .command { margin: 0 0 18px; color: #667085; font-size: 15px; }
+      pre { min-height: 520px; margin: 0; padding: 24px; overflow: hidden; border: 1px solid #d9dee8; border-radius: 8px; background: #111827; color: #e5e7eb; font: 14px/1.45 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; white-space: pre-wrap; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Debug Brief</h1>
+      <p class="command">debug-brief.md</p>
+      <pre># Debug Brief: Coupon Validation Baseline
+
+## Reproduction
+
+1. Start the app with `npm run dev`.
+2. Open the checkout page.
+3. Leave the coupon field set to `SUMMER-2026`.
+4. Click **Apply**.
+5. The UI accepts the coupon.
+6. Click **Checkout**.
+7. Checkout fails with a generic payment-style error.
+
+## Expected Behavior
+
+The invalid coupon `SUMMER-2026` should be rejected inline before checkout proceeds with:
+
+```text
+Invalid coupon code
+```
+
+## Current Observations
+
+- Valid coupon `SAVE10` exists in seeded coupon data.
+- Invalid coupon `SUMMER-2026` matches the shared format regex.
+- The UI and `/api/validate-coupon` treat format validity as coupon validity.
+- `/api/checkout` checks seeded coupon data and rejects unknown coupons.
+- Checkout returns a generic error, which hides the real validation issue.
+
+## Hypotheses
+
+| Fork | Hypothesis | Expected learning |
+| --- | --- | --- |
+| `frontend-hypothesis` | Client validation is incomplete. | Inline behavior can improve, but API inconsistency remains. |
+| `backend-hypothesis` | Checkout API error handling is incomplete. | API behavior can improve, but UI may still accept the bad coupon first. |
+| `contract-hypothesis` | Shared coupon validation contract is wrong. | UI and API behavior become consistent. |
+
+## Suggested Winning Path
+
+Start from `contract-hypothesis`, then fork it into:
+
+- `contract-minimal`: smallest shared contract fix.
+- `contract-with-regression-test`: shared contract fix plus explicit regression coverage.
+</pre>
+    </main>
+  </body>
+</html>

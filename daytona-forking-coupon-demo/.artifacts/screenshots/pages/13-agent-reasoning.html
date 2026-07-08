@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Live Agent Reasoning</title>
+    <style>
+      :root { --ink:#1e2430; --muted:#667085; --line:#d9dee8; --page:#f6f7f9; --terminal:#111827; --blue:#2267d8; --green:#177245; --amber:#a15c07; }
+      * { box-sizing: border-box; }
+      body { margin: 0; background: var(--page); color: var(--ink); font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      main { width: 1080px; margin: 0 auto; padding: 30px; }
+      h1 { margin: 0 0 8px; font-size: 32px; letter-spacing: 0; }
+      .sub { margin: 0 0 18px; color: var(--muted); font-size: 15px; }
+      .terminal { padding: 18px; border-radius: 8px; background: var(--terminal); color: #e5e7eb; font: 13px/1.45 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+      .terminal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+      .pane { min-height: 156px; padding: 14px; border: 1px solid #374151; border-radius: 6px; background: #0b1220; }
+      .pane h2 { margin: 0 0 10px; color: #f8fafc; font-size: 14px; letter-spacing: 0; }
+      .pane p { margin: 3px 0; color: #cbd5e1; overflow-wrap: anywhere; }
+      .ok { color: #86efac; }
+      .warn { color: #fcd34d; }
+      .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 16px 0; }
+      .metric { padding: 14px; border: 1px solid var(--line); border-radius: 8px; background: #fff; }
+      .metric span { display: block; color: var(--muted); font-size: 12px; font-weight: 800; text-transform: uppercase; }
+      .metric strong { display: block; margin-top: 6px; font-size: 24px; }
+      table { width: 100%; border-collapse: collapse; overflow: hidden; border: 1px solid var(--line); border-radius: 8px; background: #fff; }
+      th, td { padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; font-size: 13px; }
+      th { color: #3d4758; background: #eef2f7; font-size: 12px; text-transform: uppercase; }
+      .bar-wrap { width: 100%; height: 10px; border-radius: 999px; background: #e5e7eb; }
+      .bar { height: 10px; border-radius: 999px; background: var(--blue); }
+      .caption { margin-top: 14px; color: var(--muted); font-size: 13px; line-height: 1.4; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <style>
+        main { width: 1000px; }
+        .terminal { font-size: 12px; }
+      </style>
+      <h1>Live Agent Reasoning</h1>
+      <p class="sub">Command: npm run demo:agent. The API key is read locally and never printed.</p>
+      <div class="metrics" style="grid-template-columns: repeat(3, minmax(0, 1fr));">
+        <div class="metric"><span>model</span><strong>gpt-4.1-mini</strong></div>
+        <div class="metric"><span>latency</span><strong>12.03s</strong></div>
+        <div class="metric"><span>winner</span><strong>contract-hypothesis</strong></div>
+      </div>
+      <section class="terminal">
+        <p class="ok">Resolving Coupon Validation Inconsistency via Contract Forking</p>
+        <br />
+        <div class="terminal-grid" style="grid-template-columns: repeat(3, minmax(0, 1fr));">
+          <div class="pane">
+                <h2>frontend-hypothesis</h2>
+                <p><strong>hypothesis</strong></p>
+                <p>Client-side validation is incomplete and accepts invalid coupons, causing poor inline feedback.</p>
+                <p><strong>evidence</strong></p>
+                <p>- UI uses shallow format-based validation matching /api/validate-coupon.</p><p>- Reproduced session shows UI accepts invalid coupon SUMMER-2026 before checkout.</p>
+                <p><strong>verdict</strong></p>
+                <p class="warn">Frontend fix improves UX but fails to establish authoritative validation contract.</p>
+              </div><div class="pane">
+                <h2>backend-hypothesis</h2>
+                <p><strong>hypothesis</strong></p>
+                <p>Checkout API error handling is incomplete, returning generic failure on invalid coupons.</p>
+                <p><strong>evidence</strong></p>
+                <p>- /api/validate-coupon accepts SUMMER-2026 by format only.</p><p>- /api/checkout rejects unknown coupons but returns generic payment errors.</p>
+                <p><strong>verdict</strong></p>
+                <p class="warn">Backend fix clarifies error but does not unify UI and API validation behavior.</p>
+              </div><div class="pane">
+                <h2>contract-hypothesis</h2>
+                <p><strong>hypothesis</strong></p>
+                <p>Shared coupon validation contract is inconsistent, causing UI and API validation divergence.</p>
+                <p><strong>evidence</strong></p>
+                <p>- Both UI and /api/validate-coupon perform shallow format validation only.</p><p>- /api/checkout accesses seeded coupon data to reject unknown coupons late.</p>
+                <p><strong>verdict</strong></p>
+                <p class="ok">Contract fix achieves consistent validation shared by UI and backend, preventing invalid coupons before checkout.</p>
+              </div>
+        </div>
+        <br />
+        <div class="terminal-grid">
+          <div class="pane">
+            <h2>decision</h2>
+            <p class="ok">continue from contract-hypothesis</p>
+            <p>This branch guarantees UI and API consume the same validation contract, removing inconsistent acceptance and enabling clear user feedback before checkout.</p>
+          </div>
+          <div class="pane">
+            <h2>next fork point</h2>
+            <p>parent: contract-candidate-fix</p>
+            <p>disk state: Contract candidate fix introduces shared validation contract to reject unknown coupons early in UI and API, along with appropriate error messages.</p>
+            <p>children: contract-minimal, contract-with-regression-test</p>
+          </div>
+        </div>
+        <br />
+        <div class="pane">
+          <h2>precision caveats</h2>
+          <p>- Filesystem state is inherited by all forks ensuring consistent environment across branches.</p><p>- Process memory state is not guaranteed preserved; tests and validation isolated per fork.</p><p>- Frontend-only or backend-only fixes relieve symptoms but do not establish unified validation contract, risking regression.</p><p>- Contract-based fix requires integration and careful validation to confirm consistent user experience and error handling.</p>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,1 @@
+coupon-parent-prepared: filesystem marker written before fork

@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Daytona Fork Live</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Daytona Sandbox Forking</p>
+          <h1>Live Branch Run</h1>
+        </div>
+        <div class="controls">
+          <label class="toggle">
+            <input id="keepSandboxes" type="checkbox" checked />
+            <span>Keep</span>
+          </label>
+          <button id="demoRun" class="secondary" type="button">Demo Mode</button>
+          <button id="liveRun" type="button">Live Run</button>
+        </div>
+      </header>
+
+      <section class="status-strip" aria-label="Run status">
+        <div class="status-item">
+          <span class="label">Daytona SDK</span>
+          <strong id="sdkStatus">checking</strong>
+        </div>
+        <div class="status-item">
+          <span class="label">Auth</span>
+          <strong id="authStatus">checking</strong>
+        </div>
+        <div class="status-item">
+          <span class="label">Phase</span>
+          <strong id="phaseStatus">idle</strong>
+        </div>
+        <div class="status-item wide">
+          <span class="label">Artifact</span>
+          <strong id="reportPath">none</strong>
+        </div>
+      </section>
+
+      <section class="workspace">
+        <div class="graph-panel">
+          <div class="panel-head">
+            <h2>Fork Tree</h2>
+            <span id="runClock">00.0s</span>
+          </div>
+          <div id="forkGraph" class="fork-graph" aria-live="polite"></div>
+        </div>
+
+        <aside class="side-panel">
+          <div class="panel-head">
+            <h2>Branches</h2>
+            <span id="branchCount">0</span>
+          </div>
+          <div id="branchList" class="branch-list"></div>
+        </aside>
+      </section>
+
+      <section class="lower-grid">
+        <div class="timeline-panel">
+          <div class="panel-head">
+            <h2>Timeline</h2>
+            <span id="eventCount">0</span>
+          </div>
+          <ol id="timeline" class="timeline"></ol>
+        </div>
+        <div class="state-panel">
+          <div class="panel-head">
+            <h2>State</h2>
+            <span>counter / events</span>
+          </div>
+          <div id="stateTable" class="state-table"></div>
+        </div>
+      </section>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>

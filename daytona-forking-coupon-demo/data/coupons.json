@@ -1,0 +1,7 @@
+[
+  {
+    "code": "SAVE10",
+    "discountPercent": 10,
+    "description": "Baseline seeded coupon used by tests and screenshots."
+  }
+]

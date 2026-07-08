@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Guide Insert: Broken Coupon UI</title>
+    <link rel="stylesheet" href="../../../src/client/styles.css" />
+    <link rel="stylesheet" href="../../../src/client/forking-demo.css" />
+    <style>
+      body { background: #0a0a0a; }
+      .guide-shot {
+        width: 1040px !important;
+        max-width: 1040px !important;
+        margin: 0 auto !important;
+        padding: 24px !important;
+      }
+      .guide-shot .topbar { display: flex; margin-bottom: 18px; }
+      .guide-shot .topbar nav { display: none; }
+      .guide-shot .topbar h1 { max-width: 900px; font-size: 38px; }
+      .guide-shot .repro-workbench { margin-top: 0; }
+      .guide-shot .operator-console-panel.simple-hypothesis-panel { margin-top: 16px; }
+      .guide-shot h1,
+      .guide-shot h2,
+      .guide-shot h3,
+      .guide-shot p,
+      .guide-shot strong,
+      .guide-shot span {
+        min-width: 0;
+        overflow-wrap: anywhere;
+      }
+      .guide-shot .terminal-tags { padding: 0; }
+      .guide-shot .terminal-tags span {
+        color: #00e49a;
+        background: #111111;
+        border-color: #414141;
+      }
+      .guide-shot .pill {
+        display: inline-flex;
+        width: fit-content;
+        padding: 4px 8px;
+        border: 1px solid #414141;
+        border-radius: 999px;
+        color: #00e49a;
+        background: #111111;
+        font-size: 11px;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+      .guide-card {
+        min-width: 0;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+        padding: 18px;
+      }
+      .guide-terminal {
+        min-width: 0;
+        overflow: hidden;
+        border: 1px solid #334155;
+        border-radius: 8px;
+        background: #111827;
+      }
+      .guide-terminal header {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 10px 12px;
+        color: #cbd5e1;
+        background: #172033;
+        font-size: 12px;
+        font-weight: 900;
+      }
+      .guide-terminal pre {
+        margin: 0;
+        padding: 16px;
+        color: #fafafa;
+        font: 12px/1.45 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+      }
+      .guide-state-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 320px;
+        gap: 16px;
+      }
+      .guide-checklist {
+        display: grid;
+        gap: 10px;
+      }
+      .guide-check {
+        min-width: 0;
+        display: grid;
+        grid-template-columns: 12px minmax(0, 1fr) 26px;
+        gap: 10px;
+        align-items: center;
+        padding: 10px 12px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+      }
+      .guide-check .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        background: var(--green);
+      }
+      .guide-check strong { font-size: 13px; }
+      .guide-check span:last-child { color: var(--green); font-size: 12px; font-weight: 900; }
+      .guide-fork-tree {
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        grid-template-rows: repeat(3, minmax(128px, auto));
+        gap: 24px 14px;
+        min-height: 520px;
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #111111;
+      }
+      .guide-fork-tree .node { min-height: 126px; box-shadow: none; }
+      .guide-fork-tree .node.parent { grid-column: 3 / span 2; grid-row: 1; }
+      .guide-fork-tree .node.frontend-hypothesis { grid-column: 1 / span 2; grid-row: 2; }
+      .guide-fork-tree .node.backend-hypothesis { grid-column: 3 / span 2; grid-row: 2; }
+      .guide-fork-tree .node.contract-hypothesis { grid-column: 5 / span 2; grid-row: 2; }
+      .guide-fork-tree .node.contract-minimal { grid-column: 4 / span 2; grid-row: 3; }
+      .guide-fork-tree .node.contract-with-regression-test { grid-column: 6 / span 1; grid-row: 3; }
+      .guide-level-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .guide-level {
+        min-width: 0;
+        display: grid;
+        grid-template-columns: 220px minmax(0, 1fr);
+        gap: 12px;
+        align-items: start;
+        padding: 14px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+      }
+      .guide-level header {
+        display: grid;
+        grid-template-columns: 36px 1fr;
+        gap: 8px;
+        align-items: start;
+        margin-bottom: 0;
+      }
+      .guide-level-number {
+        display: grid;
+        width: 36px;
+        height: 36px;
+        place-items: center;
+        border-radius: 999px;
+        color: #06140d;
+        background: var(--blue);
+        font-size: 12px;
+        font-weight: 900;
+      }
+      .guide-level header h2 {
+        margin: 0 0 5px;
+        font-size: 16px;
+      }
+      .guide-level header p {
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.35;
+      }
+      .guide-level-nodes {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 10px;
+      }
+      .guide-level-node {
+        display: grid;
+        gap: 8px;
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #111111;
+      }
+      .guide-level-node.prepared,
+      .guide-level-node.changed {
+        border-color: var(--green);
+        background: color-mix(in srgb, var(--green) 13%, var(--panel));
+      }
+      .guide-level-node strong {
+        font-size: 14px;
+      }
+      .guide-level-node p {
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.35;
+      }
+      .guide-level-arrow {
+        grid-column: 2;
+        margin: 0;
+        color: var(--muted);
+        font: 18px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        text-align: left;
+      }
+      .guide-semantic-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+      .guide-semantic-grid img {
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+      }
+      
+    </style>
+  </head>
+  <body>
+    <main class="console unified-console guide-shot"><header class="topbar">
+    <div>
+      <p class="eyebrow">Coding agents + sandbox forking</p>
+      <h1>Prepare once. Fork the investigation.</h1>
+    </div>
+  </header>
+      <section class="repro-workbench" aria-label="Bug reproduction">
+        <section class="checkout" aria-labelledby="checkout-title">
+          <div class="copy">
+            <p class="eyebrow">Captured bug state</p>
+            <h2 id="checkout-title" class="repro-title">Coupon Bug Baseline</h2>
+            <p class="lead">
+              A coding agent has reproduced a real checkout failure and written the useful
+              evidence to disk. From this prepared state, forked agents can test competing fixes
+              without repeating setup.
+            </p>
+          </div>
+
+          <div class="panel">
+            <div class="product">
+              <div class="product-art" aria-hidden="true">10</div>
+              <div>
+                <h2>Agent Runtime Pack</h2>
+                <p>Seeded checkout fixture</p>
+              </div>
+              <strong>$42.00</strong>
+            </div>
+
+            <form class="coupon-form">
+              <label for="coupon">Coupon code</label>
+              <div class="coupon-row">
+                <input id="coupon" name="coupon" value="SUMMER-2026" autocomplete="off" />
+                <button type="button">Apply</button>
+              </div>
+              <p class="message ok">Coupon accepted: SUMMER-2026</p>
+            </form>
+
+            <div class="totals" aria-live="polite">
+              <div><span>Subtotal</span><strong>$42.00</strong></div>
+              <div><span>Discount</span><strong>$0.00</strong></div>
+              <div class="total"><span>Total</span><strong>$42.00</strong></div>
+            </div>
+
+            <button class="checkout-button">Checkout</button>
+            <p class="message error">Checkout failed. Please try another payment method.</p>
+
+            <div class="bug-location">
+              <strong>Bug appears here</strong>
+              <span>After Apply: <code>Coupon accepted: SUMMER-2026</code></span>
+              <span>After Checkout: <code>generic checkout error shown above</code></span>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section class="operator-console-panel simple-hypothesis-panel" aria-label="Forked agent paths">
+        <div class="operator-console-head">
+          <div>
+            <p class="eyebrow">Forked agent paths</p>
+            <h2>Same parent state, different debugging strategies</h2>
+          </div>
+        </div>
+        <div class="terminal-split-grid">
+          <article class="hypothesis-card">
+            <span class="pill">hypothesis</span>
+            <h3>Frontend validation</h3>
+            <p class="hypothesis-focus">Could the form be accepting SUMMER-2026 too early?</p>
+            <p>Test whether the first bad state enters through the browser validation path.</p>
+            <strong>Hypothesis to test</strong>
+            <div class="terminal-tags"><span>src/client/app.js</span></div>
+          </article>
+          <article class="hypothesis-card">
+            <span class="pill">hypothesis</span>
+            <h3>Backend/API validation</h3>
+            <p class="hypothesis-focus">Could checkout be rejecting the coupon too late?</p>
+            <p>Test whether the API response shape or checkout validation timing is the real failure point.</p>
+            <strong>Hypothesis to test</strong>
+            <div class="terminal-tags"><span>src/server/app.js</span></div>
+          </article>
+          <article class="hypothesis-card">
+            <span class="pill">hypothesis</span>
+            <h3>Shared coupon contract</h3>
+            <p class="hypothesis-focus">Could the UI and API be using the wrong shared rule?</p>
+            <p>Test whether one shared coupon rule should decide what both UI and API accept.</p>
+            <strong>Hypothesis to test</strong>
+            <div class="terminal-tags"><span>src/shared/couponContract.js</span></div>
+          </article>
+        </div>
+      </section></main>
+  </body>
+</html>

@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Failing Baseline Tests</title>
+    <style>
+      body { margin: 0; background: #f6f7f9; color: #1e2430; font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      main { width: 1120px; margin: 0 auto; padding: 36px; }
+      h1 { margin: 0 0 10px; font-size: 32px; letter-spacing: 0; }
+      .command { margin: 0 0 18px; color: #667085; font-size: 15px; }
+      pre { min-height: 520px; margin: 0; padding: 24px; overflow: hidden; border: 1px solid #d9dee8; border-radius: 8px; background: #111827; color: #e5e7eb; font: 14px/1.45 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; white-space: pre-wrap; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Failing Baseline Tests</h1>
+      <p class="command">npm test</p>
+      <pre>
+&gt; daytona-forking-coupon-demo@0.1.0 test
+&gt; node --test tests/*.test.js
+
+✔ validation API accepts the seeded coupon (0.40575ms)
+✖ validation API should reject unknown coupon codes (0.4325ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at TestContext.&lt;anonymous&gt; (file:///Users/hana/Documents/Code/daytona-forking-exploration/daytona-forking-coupon-demo/tests/api.test.js:12:10)
+      at Test.runInAsyncScope (node:async_hooks:211:14)
+      at Test.run (node:internal/test_runner/test:931:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:629:18)
+      at Test.postRun (node:internal/test_runner/test:1042:19)
+      at Test.run (node:internal/test_runner/test:970:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:297:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual'
+  }
+
+✔ checkout API currently exposes the layered failure (0.430625ms)
+✖ invalid coupon is rejected during validation instead of checkout (0.789ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at TestContext.&lt;anonymous&gt; (file:///Users/hana/Documents/Code/daytona-forking-exploration/daytona-forking-coupon-demo/tests/e2e.test.js:8:10)
+      at Test.runInAsyncScope (node:async_hooks:211:14)
+      at Test.run (node:internal/test_runner/test:931:25)
+      at Test.start (node:internal/test_runner/test:829:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:297:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual'
+  }
+
+✔ valid seeded coupon can be entered (1.745833ms)
+✖ invalid unknown coupon should be rejected inline before checkout (1.613917ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at TestContext.&lt;anonymous&gt; (file:///Users/hana/Documents/Code/daytona-forking-exploration/daytona-forking-coupon-demo/tests/ui.test.js:12:10)
+      at Test.runInAsyncScope (node:async_hooks:211:14)
+      at Test.run (node:internal/test_runner/test:931:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:629:18)
+      at Test.postRun (node:internal/test_runner/test:1042:19)
+      at Test.run (node:internal/test_runner/test:970:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:297:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual'
+  }
+
+ℹ tests 6
+ℹ suites 0
+ℹ pass 3
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 123.957958
+
+✖ failing tests:
+
+test at tests/api.test.js:10:1
+✖ validation API should reject unknown coupon codes (0.4325ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at TestContext.&lt;anonymous&gt; (file:///Users/hana/Documents/Code/daytona-forking-exploration/daytona-forking-coupon-demo/tests/api.test.js:12:10)
+      at Test.runInAsyncScope (node:async_hooks:211:14)
+      at Test.run (node:internal/test_runner/test:931:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:629:18)
+      at Test.postRun (node:internal/test_runner/test:1042:19)
+      at Test.run (node:internal/test_runner/test:970:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:297:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual'
+  }
+
+test at tests/e2e.test.js:5:1
+✖ invalid coupon is rejected during validation instead of checkout (0.789ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at TestContext.&lt;anonymous&gt; (file:///Users/hana/Documents/Code/daytona-forking-exploration/daytona-forking-coupon-demo/tests/e2e.test.js:8:10)
+      at Test.runInAsyncScope (node:async_hooks:211:14)
+      at Test.run (node:internal/test_runner/test:931:25)
+      at Test.start (node:internal/test_runner/test:829:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:297:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual'
+  }
+
+test at tests/ui.test.js:10:1
+✖ invalid unknown coupon should be rejected inline before checkout (1.613917ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at TestContext.&lt;anonymous&gt; (file:///Users/hana/Documents/Code/daytona-forking-exploration/daytona-forking-coupon-demo/tests/ui.test.js:12:10)
+      at Test.runInAsyncScope (node:async_hooks:211:14)
+      at Test.run (node:internal/test_runner/test:931:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:629:18)
+      at Test.postRun (node:internal/test_runner/test:1042:19)
+      at Test.run (node:internal/test_runner/test:970:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:297:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual'
+  }
+</pre>
+    </main>
+  </body>
+</html>

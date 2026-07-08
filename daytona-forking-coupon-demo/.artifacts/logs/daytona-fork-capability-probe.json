@@ -1,0 +1,601 @@
+{
+  "generatedAt": "2026-07-07T00:15:47.917Z",
+  "startedAt": "2026-07-07T00:15:44.132Z",
+  "command": "probe",
+  "inventory": {
+    "generatedAt": "2026-07-07T00:15:45.173Z",
+    "command": "inventory",
+    "environment": {
+      "target": null,
+      "apiUrlConfigured": false,
+      "apiKeyConfigured": true
+    },
+    "sandboxClasses": {
+      "LINUX_VM": "linux-vm",
+      "CONTAINER": "container",
+      "ANDROID": "android",
+      "WINDOWS": "windows",
+      "UNKNOWN_DEFAULT_OPEN_API": "11184809"
+    },
+    "regions": {
+      "ok": true,
+      "ms": 260,
+      "items": [
+        {
+          "id": "eu",
+          "name": "eu",
+          "organizationId": null,
+          "regionType": "shared",
+          "createdAt": "2025-12-03T14:19:24.297Z",
+          "updatedAt": "2025-12-03T14:19:24.297Z",
+          "proxyUrl": "https://daytonaproxy01.eu",
+          "sshGatewayUrl": null,
+          "snapshotManagerUrl": null
+        },
+        {
+          "id": "us",
+          "name": "us",
+          "organizationId": null,
+          "regionType": "shared",
+          "createdAt": "2025-12-03T14:19:24.297Z",
+          "updatedAt": "2025-12-03T14:19:24.297Z",
+          "proxyUrl": null,
+          "sshGatewayUrl": null,
+          "snapshotManagerUrl": null
+        }
+      ]
+    },
+    "snapshots": {
+      "ok": true,
+      "ms": 194,
+      "total": 21,
+      "items": [
+        {
+          "id": "7952c223-9fea-4dc2-9ddc-e58516f8ecba",
+          "name": "coupon-prepared-baseline",
+          "general": false,
+          "state": "active",
+          "imageName": "",
+          "sandboxClass": "linux-vm",
+          "regionIds": [
+            "us-east-1"
+          ],
+          "ref": "cr.app.daytona.io/sbox/daytona-0aad2f4d7c47e3e1206388874795136ff1dac95368f642509d6c173d9f8c9278:daytona",
+          "cpu": 1,
+          "mem": 1,
+          "disk": 3,
+          "gpu": 0,
+          "errorReason": null
+        },
+        {
+          "id": "ca5f6bed-1ebd-498f-bf06-bd8947fc3685",
+          "name": "daytonaio/sandbox:0.8.0",
+          "general": true,
+          "state": "active",
+          "imageName": "daytonaio/sandbox:0.8.0",
+          "sandboxClass": "container",
+          "regionIds": [
+            "us"
+          ],
+          "ref": "cr.app.daytona.io/sbox/daytona-edb66f95f2f09a28a029a0e03d516cf5482ef13a218e93ab1d80954f6ee7ebbb:daytona",
+          "cpu": 1,
+          "mem": 1,
+          "disk": 3,
+          "gpu": 0,
+          "errorReason": null
+        },
+        {
+          "id": "1457c31f-e0c0-4d49-9a68-8bd5489d0e4b",
+          "name": "daytonaio/sandbox:0.6.0",
+          "general": true,
+          "state": "active",
+          "imageName": "daytonaio/sandbox:0.6.0",
+          "sandboxClass": "container",
+          "regionIds": [
+            "us"
+          ],
+          "ref": "cr.app.daytona.io/sbox/daytona-eb4382f817a77f86135fc2543c8fc00699168051c7726028e70144a97e9b9e0d:daytona",
+          "cpu": 1,
+          "mem": 1,
+          "disk": 3,
+          "gpu": 0,
+          "errorReason": null
+        },
+        {
+          "id": "f49620c1-d1bb-470e-ad53-43f196d35cb4",
+          "name": "daytona-vm-small",
+          "general": true,
+          "state": "active",
+          "imageName": "daytonaio/sandbox:0.8.0",
+          "sandboxClass": "linux-vm",
+          "regionIds": [
+            "us-east-1"
+          ],
+          "ref": "cr.app.daytona.io/sbox/daytona-edb66f95f2f09a28a029a0e03d516cf5482ef13a218e93ab1d80954f6ee7ebbb:daytona",
+          "cpu": 1,
+          "mem": 1,
+          "disk": 3,
+          "gpu": 0,
+          "errorReason": null
+        },
+        {
+          "id": "8f7258ad-fe98-4210-aa70-fb4b820a0923",
+          "name": "daytona-large",
+          "general": true,
+          "state": "active",
+          "imageName": "daytonaio/sandbox:0.8.0",
+          "sandboxClass": "container",
+          "regionIds": [
+            "us"
+          ],
+          "ref": "cr.app.daytona.io/sbox/daytona-edb66f95f2f09a28a029a0e03d516cf5482ef13a218e93ab1d80954f6ee7ebbb:daytona",
+          "cpu": 4,
+          "mem": 8,
+          "disk": 10,
+          "gpu": 0,
+          "errorReason": null
+        },
+        {
+          "id": "8e533bc9-eabd-40bb-89d9-a64e4e910a0f",
+          "name": "daytona-small",
+          "general": true,
+          "state": "active",
+          "imageName": "daytonaio/sandbox:0.8.0",
+          "sandboxClass": "container",
+          "regionIds": [
+            "us"
+          ],
+          "ref": "cr.app.daytona.io/sbox/daytona-edb66f95f2f09a28a029a0e03d516cf5482ef13a218e93ab1d80954f6ee7ebbb:daytona",
+          "cpu": 1,
+          "mem": 1,
+          "disk": 3,
+          "gpu": 0,
+          "errorReason": null
+        },
+        {
+          "id": "4c37811b-309b-4aa2-86cc-e95ce87ecd46",
+          "name": "windows-large",
+          "general": true,
+          "state": "active",
+          "imageName": "windows-server-2025-cu-r1",
+          "sandboxClass": "windows",
+          "regionIds": [
+            "us"
+          ],
+          "ref": "windows-server-2025-cu-r1",
+          "cpu": 4,
+          "mem": 16,
+          "disk": 50,
+          "gpu": 0,
+          "errorReason": null
+        },
+        {
+          "id": "1477894e-1b04-4396-97c4-59e0b070093e",
+          "name": "daytona-gpu",
+          "general": true,
+          "state": "active",
+          "imageName": "",
+          "sandboxClass": "container",
+          "regionIds": [
+            "us"
+          ],
+          "ref": "cr.app.daytona.io/sbox/daytona-5e321aea98b316a84b5baee6c32656b29a6caef03392ce109da10ba33f0dcbf7:daytona",
+          "cpu": 1,
+          "mem": 1,
+          "disk": 1,
+          "gpu": 1,
+          "errorReason": null
+        },
+        {
+          "id": "ebfb8d45-1735-43ab-844d-94b1c8193da4",
+          "name": "windows-small",
+          "general": true,
+          "state": "active",
+          "imageName": "windows-server-2025-cu-r1",
+          "sandboxClass": "windows",
+          "regionIds": [
+            "us"
+          ],
+          "ref": "windows-server-2025-cu-r1",
+          "cpu": 1,
+          "mem": 4,
+          "disk": 30,
+          "gpu": 0,
+          "errorReason": null
+        },
+        {
+          "id": "67ad03c0-f92c-48a1-96e5-b0dac191750c",
+          "name": "daytona-medium",
+          "general": true,
+          "state": "active",
+          "imageName": "daytonaio/sandbox:0.8.0",
+          "sandboxClass": "container",
+          "regionIds": [
+            "us"
+          ],
+          "ref": "cr.app.daytona.io/sbox/daytona-edb66f95f2f09a28a029a0e03d516cf5482ef13a218e93ab1d80954f6ee7ebbb:daytona",
+          "cpu": 2,
+          "mem": 4,
+          "disk": 8,
+          "gpu": 0,
+          "errorReason": null
+        },
+        {
+          "id": "6eaee55f-befe-4382-8757-3d1f071d3e65",
+          "name": "daytona-vm-large",
+          "general": true,
+          "state": "active",
+          "imageName": "daytonaio/sandbox:0.8.0",
+          "sandboxClass": "linux-vm",
+          "regionIds": [
+            "us-east-1"
+          ],
+          "ref": "cr.app.daytona.io/sbox/daytona-edb66f95f2f09a28a029a0e03d516cf5482ef13a218e93ab1d80954f6ee7ebbb:daytona",
+          "cpu": 4,
+          "mem": 8,
+          "disk": 10,
+          "gpu": 0,
+          "errorReason": null
+        },
+        {
+          "id": "1650dc01-8b40-4af5-891e-a32de4d7d748",
+          "name": "daytona-vm-ubuntu-xxl",
+          "general": true,
+          "state": "active",
+          "imageName": "ubuntu:24.04",
+          "sandboxClass": "linux-vm",
+          "regionIds": [
+            "us-east-1"
+          ],
+          "ref": "cr.app.daytona.io/sbox/daytona-52df9b1ee71626e0088f7d400d5c6b5f7bb916f8f0c82b474289a4ece6cf3faf:daytona",
+          "cpu": 4,
+          "mem": 16,
+          "disk": 20,
+          "gpu": 0,
+          "errorReason": null
+        },
+        {
+          "id": "eb8b476b-e26c-48c2-9981-5b858e976df0",
+          "name": "daytona-vm",
+          "general": true,
+          "state": "active",
+          "imageName": "daytonaio/sandbox:0.8.0",
+          "sandboxClass": "linux-vm",
+          "regionIds": [
+            "us-east-1"
+          ],
+          "ref": "cr.app.daytona.io/sbox/daytona-edb66f95f2f09a28a029a0e03d516cf5482ef13a218e93ab1d80954f6ee7ebbb:daytona",
+          "cpu": 1,
+          "mem": 1,
+          "disk": 3,
+          "gpu": 0,
+          "errorReason": null
+        },
+        {
+          "id": "dc0eb3c0-6c2e-403e-804c-6b0533be3be2",
+          "name": "windows-medium",
+          "general": true,
+          "state": "active",
+          "imageName": "windows-server-2025-cu-r1",
+          "sandboxClass": "windows",
+          "regionIds": [
+            "us"
+          ],
+          "ref": "windows-server-2025-cu-r1",
+          "cpu": 2,
+          "mem": 8,
+          "disk": 50,
+          "gpu": 0,
+          "errorReason": ""
+        },
+        {
+          "id": "13555e3f-7130-40f1-9672-711c0ea08562",
+          "name": "daytonaio/sandbox:0.4.3",
+          "general": true,
+          "state": "active",
+          "imageName": "daytonaio/sandbox:0.4.3",
+          "sandboxClass": "container",
+          "regionIds": [
+            "us"
+          ],
+          "ref": "cr.app.daytona.io/sbox/13555e3f-7130-40f1-9672-711c0ea08562:0.4.3",
+          "cpu": 1,
+          "mem": 1,
+          "disk": 3,
+          "gpu": 0,
+          "errorReason": null
+        },
+        {
+          "id": "daffdb59-5963-4e37-89d0-a14510e137e7",
+          "name": "daytona-vm-medium",
+          "general": true,
+          "state": "active",
+          "imageName": "daytonaio/sandbox:0.8.0",
+          "sandboxClass": "linux-vm",
+          "regionIds": [
+            "us-east-1"
+          ],
+          "ref": "cr.app.daytona.io/sbox/daytona-edb66f95f2f09a28a029a0e03d516cf5482ef13a218e93ab1d80954f6ee7ebbb:daytona",
+          "cpu": 2,
+          "mem": 4,
+          "disk": 8,
+          "gpu": 0,
+          "errorReason": null
+        },
+        {
+          "id": "bdf96e5a-f84b-4444-9c1a-d6d3dbca90c1",
+          "name": "daytonaio/sandbox:0.5.1",
+          "general": true,
+          "state": "active",
+          "imageName": "daytonaio/sandbox:0.5.1",
+          "sandboxClass": "container",
+          "regionIds": [
+            "us"
+          ],
+          "ref": "cr.app.daytona.io/sbox/daytona-690db7a065defcbe4aa1f74338178aead265307f5dcab28026f49d6e48f17ad4:daytona",
+          "cpu": 1,
+          "mem": 1,
+          "disk": 3,
+          "gpu": 0,
+          "errorReason": null
+        },
+        {
+          "id": "1b491981-04e3-4ccc-be53-4abcd6fb684b",
+          "name": "daytonaio/sandbox:0.7.0",
+          "general": true,
+          "state": "active",
+          "imageName": "daytonaio/sandbox:0.7.0",
+          "sandboxClass": "container",
+          "regionIds": [
+            "us"
+          ],
+          "ref": "cr.app.daytona.io/sbox/daytona-aa27247ce01e6b0a2e262e248faf064b40039cebaaa065bb56f0172a6f3741d6:daytona",
+          "cpu": 1,
+          "mem": 1,
+          "disk": 3,
+          "gpu": 0,
+          "errorReason": null
+        },
+        {
+          "id": "a507908f-45e9-4b94-816a-8d74bc74fdb7",
+          "name": "daytonaio/sandbox:0.3.0",
+          "general": true,
+          "state": "active",
+          "imageName": "daytonaio/sandbox:0.3.0",
+          "sandboxClass": "container",
+          "regionIds": [
+            "us"
+          ],
+          "ref": "harbor.internal.daytona.app/bbox/a507908f-45e9-4b94-816a-8d74bc74fdb7:0.3.0",
+          "cpu": 1,
+          "mem": 1,
+          "disk": 3,
+          "gpu": 0,
+          "errorReason": ""
+        },
+        {
+          "id": "363b3622-5965-4c2f-bc3b-a23cf0718f5d",
+          "name": "daytonaio/sandbox:0.5.2",
+          "general": true,
+          "state": "active",
+          "imageName": "daytonaio/sandbox:0.5.2",
+          "sandboxClass": "container",
+          "regionIds": [
+            "us"
+          ],
+          "ref": "cr.app.daytona.io/sbox/daytona-10f1453ac3e50409e9bb8f9dafecf6828352487d3aa5b868c1b24df0d892203e:daytona",
+          "cpu": 1,
+          "mem": 1,
+          "disk": 3,
+          "gpu": 0,
+          "errorReason": null
+        },
+        {
+          "id": "5fb582b5-2322-4082-b742-4c0a67029bf5",
+          "name": "daytonaio/sandbox:0.4.1",
+          "general": true,
+          "state": "active",
+          "imageName": "daytonaio/sandbox:0.4.1",
+          "sandboxClass": "container",
+          "regionIds": [
+            "us"
+          ],
+          "ref": "cr.app.daytona.io/sbox/5fb582b5-2322-4082-b742-4c0a67029bf5:0.4.1",
+          "cpu": 1,
+          "mem": 1,
+          "disk": 3,
+          "gpu": 0,
+          "errorReason": null
+        }
+      ]
+    },
+    "runners": {
+      "ok": false,
+      "ms": 113,
+      "error": {
+        "message": "Request failed with status code 404",
+        "status": 404,
+        "response": "Cannot GET /api/runners"
+      }
+    },
+    "adminRunners": {
+      "ok": false,
+      "ms": 122,
+      "error": {
+        "message": "Request failed with status code 403",
+        "status": 403,
+        "response": "Access denied"
+      }
+    },
+    "regionRunners": [
+      {
+        "label": "list runners in eu",
+        "ok": false,
+        "ms": 120,
+        "error": {
+          "message": "Request failed with status code 404",
+          "status": 404,
+          "response": "Cannot GET /api/runners?regionId=eu"
+        }
+      },
+      {
+        "label": "list runners in us",
+        "ok": false,
+        "ms": 120,
+        "error": {
+          "message": "Request failed with status code 404",
+          "status": 404,
+          "response": "Cannot GET /api/runners?regionId=us"
+        }
+      }
+    ],
+    "sandboxes": [
+      {
+        "id": "9d99e9e4-2b25-4475-9df9-ca2147d209ef",
+        "name": "9d99e9e4-2b25-4475-9df9-ca2147d209ef",
+        "state": "error",
+        "target": "us-east-1",
+        "snapshot": "daytona-vm-small",
+        "cpu": 1,
+        "memory": 1,
+        "disk": 3
+      },
+      {
+        "id": "72bc4209-0a81-42c1-9787-b18c0318aed7",
+        "name": "72bc4209-0a81-42c1-9787-b18c0318aed7",
+        "state": "started",
+        "target": "us",
+        "snapshot": "daytonaio/sandbox:0.8.0",
+        "cpu": 1,
+        "memory": 1,
+        "disk": 3
+      }
+    ]
+  },
+  "attempts": [
+    {
+      "target": "us-east-1",
+      "snapshot": "default",
+      "params": {
+        "snapshot": null
+      },
+      "createdAt": "2026-07-07T00:15:45.176Z",
+      "steps": [
+        {
+          "operation": "create parent",
+          "ok": false,
+          "ms": 122,
+          "error": {
+            "message": "Snapshot daytonaio/sandbox:0.8.0 is not available in region us-east-1"
+          }
+        }
+      ]
+    },
+    {
+      "target": "us-east-1",
+      "snapshot": "daytona-vm-small",
+      "params": {
+        "snapshot": "daytona-vm-small"
+      },
+      "createdAt": "2026-07-07T00:15:45.299Z",
+      "steps": [
+        {
+          "operation": "create parent",
+          "ok": false,
+          "ms": 192,
+          "error": {
+            "message": "Sandbox failed to start: internal error"
+          }
+        }
+      ]
+    },
+    {
+      "target": "us-east-1",
+      "snapshot": "daytona-vm-medium",
+      "params": {
+        "snapshot": "daytona-vm-medium"
+      },
+      "createdAt": "2026-07-07T00:15:45.491Z",
+      "steps": [
+        {
+          "operation": "create parent",
+          "ok": true,
+          "ms": 1193,
+          "sandbox": {
+            "id": "15d41c1e-805c-4366-936d-551719fb3371",
+            "name": "coupon-fork-probe-1783383345491-2",
+            "state": "started",
+            "target": "us-east-1",
+            "snapshot": "daytona-vm-medium",
+            "cpu": 2,
+            "memory": 4,
+            "disk": 8
+          }
+        },
+        {
+          "operation": "write marker",
+          "ok": true,
+          "ms": 358
+        },
+        {
+          "operation": "fork parent",
+          "ok": true,
+          "ms": 464,
+          "sandbox": {
+            "id": "c7317f84-5c52-4a15-8e1a-100014537586",
+            "name": "coupon-fork-probe-1783383345491-2-fork",
+            "state": "started",
+            "target": "us-east-1",
+            "snapshot": "daytona-vm-medium",
+            "cpu": 2,
+            "memory": 4,
+            "disk": 8
+          }
+        },
+        {
+          "operation": "verify fork inherited marker",
+          "ok": true,
+          "ms": 135,
+          "output": "fork-probe-parent"
+        }
+      ],
+      "success": true,
+      "cleanup": [
+        {
+          "label": "fork",
+          "ok": true,
+          "ms": 111
+        },
+        {
+          "label": "parent",
+          "ok": true,
+          "ms": 165
+        }
+      ]
+    }
+  ],
+  "winner": {
+    "target": "us-east-1",
+    "snapshot": "daytona-vm-medium",
+    "parent": {
+      "id": "15d41c1e-805c-4366-936d-551719fb3371",
+      "name": "coupon-fork-probe-1783383345491-2",
+      "state": "started",
+      "target": "us-east-1",
+      "snapshot": "daytona-vm-medium",
+      "cpu": 2,
+      "memory": 4,
+      "disk": 8
+    },
+    "fork": {
+      "id": "c7317f84-5c52-4a15-8e1a-100014537586",
+      "name": "coupon-fork-probe-1783383345491-2-fork",
+      "state": "started",
+      "target": "us-east-1",
+      "snapshot": "daytona-vm-medium",
+      "cpu": 2,
+      "memory": 4,
+      "disk": 8
+    }
+  }
+}

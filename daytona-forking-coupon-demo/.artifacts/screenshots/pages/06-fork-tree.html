@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fork Tree Output</title>
+    <style>
+      body { margin: 0; background: #f6f7f9; color: #1e2430; font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      main { width: 1120px; margin: 0 auto; padding: 36px; }
+      h1 { margin: 0 0 10px; font-size: 32px; letter-spacing: 0; }
+      .command { margin: 0 0 18px; color: #667085; font-size: 15px; }
+      pre { min-height: 520px; margin: 0; padding: 24px; overflow: hidden; border: 1px solid #d9dee8; border-radius: 8px; background: #111827; color: #e5e7eb; font: 14px/1.45 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; white-space: pre-wrap; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Fork Tree Output</h1>
+      <p class="command">npm run fork-tree-demo</p>
+      <pre>
+&gt; daytona-forking-coupon-demo@0.1.0 fork-tree-demo
+&gt; node scripts/fork-tree-demo.js
+
+coupon-parent-prepared
+├── frontend-hypothesis
+├── backend-hypothesis
+└── contract-hypothesis
+    ├── contract-candidate-fix
+    │   ├── api-design-review
+    │   ├── implementation-review
+    │   ├── regression-test-builder
+    │   └── memory-state-check
+    ├── contract-minimal
+    └── contract-with-regression-test
+
+Why multi-level forking matters:
+- The first fork point is the prepared parent state.
+- The contract branch writes a candidate fix before more forks happen.
+- Validator forks inherit the actual changed branch, not just the original baseline.
+- If a validator rejects the fix, the demo keeps iterating from the exact contract-fix parent.
+</pre>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Daytona Forking Console</title>
+    <link rel="stylesheet" href="/forking-demo.css" />
+  </head>
+  <body>
+    <main class="console">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Daytona forking console</p>
+          <h1>Coupon Debug Fork Tree</h1>
+        </div>
+        <nav>
+          <a href="/">Checkout bug</a>
+          <a href="/api/forking-state">State JSON</a>
+        </nav>
+      </header>
+
+      <section class="status-band">
+        <div>
+          <span class="label">Mode</span>
+          <strong id="mode">loading</strong>
+        </div>
+        <div>
+          <span class="label">Daytona probe</span>
+          <strong id="live-status">loading</strong>
+        </div>
+        <div>
+          <span class="label">Bug replicated</span>
+          <strong id="replication-status">checking</strong>
+        </div>
+        <div>
+          <span class="label">Credential handling</span>
+          <strong>OpenAI in .env; Daytona optional</strong>
+        </div>
+      </section>
+
+      <section class="layout">
+        <section class="tree-panel" aria-labelledby="tree-title">
+          <div class="section-head">
+            <h2 id="tree-title">Forking Work</h2>
+            <p id="headline">Loading prepared state.</p>
+          </div>
+          <div id="fork-tree" class="fork-tree"></div>
+        </section>
+
+        <aside class="state-panel" aria-labelledby="state-title">
+          <div class="section-head">
+            <h2 id="state-title">Parent State Before Fork</h2>
+            <p>Useful work is already on disk before a branch starts.</p>
+          </div>
+          <div id="parent-state" class="checklist"></div>
+        </aside>
+      </section>
+
+      <section class="multi-level-panel" aria-labelledby="multi-level-title">
+        <div class="section-head wide">
+          <div>
+            <h2 id="multi-level-title">Multi-Level Fork Tree</h2>
+            <p>
+              The contract branch writes a candidate fix before it becomes the parent for
+              refinements, validators, and the memory-state probe.
+            </p>
+          </div>
+        </div>
+        <div id="multi-level-tree" class="multi-level-tree"></div>
+      </section>
+
+      <section class="fork-comparison-panel" aria-labelledby="comparison-title">
+        <div class="section-head wide">
+          <div>
+            <h2 id="comparison-title">Why fork instead of clone?</h2>
+            <p>
+              Multi-level forks inherit intermediate work. Validators start from the actual
+              candidate fix instead of rebuilding context from the original baseline.
+            </p>
+          </div>
+        </div>
+        <div class="clone-compare">
+          <div id="clone-fanout"></div>
+          <div id="forked-state-tree"></div>
+        </div>
+      </section>
+
+      <section class="grid-two">
+        <section class="steps-panel">
+          <div class="section-head">
+            <h2>Lifecycle Steps</h2>
+            <p>Stop, pause, fork, snapshot, and restore are kept distinct.</p>
+          </div>
+          <div id="steps" class="steps"></div>
+        </section>
+
+        <section class="setup-panel">
+          <div class="section-head">
+            <h2>Advanced Daytona Probe</h2>
+            <p>The local recording flow does not need this. Use it only to test a Daytona dtn_ key against a fork-capable runner.</p>
+          </div>
+          <details class="advanced-live-check">
+            <summary>Run advanced Daytona capability check</summary>
+            <form id="daytona-form" class="key-form">
+              <label for="daytona-key">Daytona API key</label>
+              <input
+                id="daytona-key"
+                name="apiKey"
+                type="password"
+                autocomplete="off"
+                autocapitalize="none"
+                autocorrect="off"
+                spellcheck="false"
+                placeholder="dtn_..."
+              />
+              <button id="daytona-start" type="submit">Run advanced Daytona probe</button>
+              <p id="daytona-form-status">Replicate the bug first. This is separate from npm run demo:codex, which runs the recording flow.</p>
+            </form>
+          </details>
+          <div class="session-tools">
+            <div>
+              <span class="label">Server state</span>
+              <strong id="server-state-label">loading</strong>
+              <p id="server-state-detail">Reading data/demo-session-state.json.</p>
+            </div>
+            <button id="reset-session" type="button">Reset Reproduction</button>
+          </div>
+          <p class="small-note">Alternative CLI path: <code>npm run daytona:check</code>, <code>npm run daytona:plan</code>, <code>npm run daytona:live</code>.</p>
+        </section>
+      </section>
+
+      <section class="step-checklist-panel" aria-labelledby="step-checklist-title">
+        <div class="section-head wide">
+          <div>
+            <h2 id="step-checklist-title">Demo Step Checklist</h2>
+            <p>Use this as the running checklist for the demo build and live run.</p>
+          </div>
+        </div>
+        <div id="demo-step-checklist" class="demo-step-checklist"></div>
+      </section>
+
+      <section class="validator-panel" aria-labelledby="validator-title">
+        <div class="section-head wide">
+          <div>
+            <h2 id="validator-title">Post-Fix Validator Fan-Out</h2>
+            <p id="agent-pattern">A better fork point is one where the parent has already written useful disk state.</p>
+          </div>
+        </div>
+        <div class="candidate-strip">
+          <div>
+            <span class="label">Candidate fix state</span>
+            <strong>contract-candidate-fix</strong>
+          </div>
+          <ul id="candidate-state"></ul>
+        </div>
+        <div id="validators" class="validators"></div>
+      </section>
+
+      <section class="memory-panel" aria-labelledby="memory-title">
+        <div class="section-head wide">
+          <div>
+            <h2 id="memory-title">Memory-State Probe</h2>
+            <p id="memory-detail">This probe attempts to fork after warming live process memory and records what the runner actually preserves.</p>
+          </div>
+        </div>
+        <div id="memory-probe" class="memory-probe"></div>
+      </section>
+
+      <section class="fork-log-panel" aria-labelledby="fork-log-title">
+        <div class="section-head wide">
+          <div>
+            <h2 id="fork-log-title">Fork Spawn Log</h2>
+            <p>Timestamped record of each parent, fork, sandbox ID, inherited state, action, and result.</p>
+          </div>
+        </div>
+        <div id="fork-events" class="fork-events"></div>
+      </section>
+
+      <section class="terminal-grid" aria-labelledby="terminal-title">
+        <div class="section-head wide">
+          <h2 id="terminal-title">Evidence Panels</h2>
+          <p>Terminal-style output without splitting the story across several real terminals.</p>
+        </div>
+        <div id="terminals" class="terminals"></div>
+      </section>
+
+      <section class="live-log-panel" aria-labelledby="live-log-title">
+        <div class="section-head wide">
+          <div>
+            <h2 id="live-log-title">Advanced Daytona Probe Log</h2>
+            <p>Output from the optional browser-started Daytona probe. API keys are not printed here.</p>
+          </div>
+        </div>
+        <pre id="live-log" class="live-log">No live run started.</pre>
+      </section>
+    </main>
+    <script type="module" src="/forking-demo.js"></script>
+  </body>
+</html>

@@ -1,0 +1,233 @@
+{
+  "generatedAt": "2026-07-07T00:43:29.697Z",
+  "mode": "codex-style",
+  "prompt": "I have a checkout bug: SUMMER-2026 is accepted in the UI, then checkout fails generically. My hypotheses are frontend validation, backend checkout/API validation, and shared coupon contract/schema. Fork the sandboxes and test which hypothesis is correct.",
+  "bug": {
+    "invalidCoupon": "SUMMER-2026",
+    "summary": "SUMMER-2026 is accepted by the UI, then checkout fails generically."
+  },
+  "reproducedAt": "2026-07-06T23:32:02.894Z",
+  "preparedState": [
+    "repo files",
+    "installed dependencies",
+    "build artifacts",
+    "seeded coupon data",
+    "failing baseline logs",
+    "debug brief",
+    "state-marker.txt",
+    "benchmark output"
+  ],
+  "results": [
+    {
+      "name": "frontend-hypothesis",
+      "short": "frontend validation",
+      "hypothesis": "The UI accepts SUMMER-2026 because client-side validation is too weak.",
+      "forkMs": 420,
+      "testMs": 240,
+      "files": [
+        "src/client/app.js"
+      ],
+      "experiment": "Patch the coupon form so it rejects unknown coupons inline.",
+      "checks": [
+        [
+          "PASS",
+          "The visible form can show Invalid coupon code."
+        ],
+        [
+          "FAIL",
+          "/api/validate-coupon can still accept a format-valid unknown coupon."
+        ],
+        [
+          "FAIL",
+          "The shared validation rule is still split across UI/API paths."
+        ]
+      ],
+      "verdict": "partial",
+      "decision": "This fixes the first visible symptom, but it does not prove the backend and UI share one coupon rule."
+    },
+    {
+      "name": "backend-hypothesis",
+      "short": "backend checkout/API validation",
+      "hypothesis": "Checkout fails generically because the API handles invalid coupons too late.",
+      "forkMs": 470,
+      "testMs": 260,
+      "files": [
+        "src/server/app.js"
+      ],
+      "experiment": "Patch checkout/API behavior so unknown coupons return a specific validation error.",
+      "checks": [
+        [
+          "PASS",
+          "Checkout can return a clearer invalid-coupon response."
+        ],
+        [
+          "FAIL",
+          "The browser can still accept SUMMER-2026 before checkout."
+        ],
+        [
+          "FAIL",
+          "The entry validation endpoint and checkout path still disagree."
+        ]
+      ],
+      "verdict": "partial",
+      "decision": "This catches the bad coupon later, but it still allows bad state to enter the checkout flow."
+    },
+    {
+      "name": "contract-hypothesis",
+      "short": "shared coupon contract/schema",
+      "hypothesis": "The UI and API disagree because the shared coupon contract is wrong.",
+      "forkMs": 510,
+      "testMs": 310,
+      "files": [
+        "src/shared/couponContract.js",
+        "src/client/app.js",
+        "src/server/app.js"
+      ],
+      "experiment": "Move unknown-coupon rejection into the shared validation contract used by both layers.",
+      "checks": [
+        [
+          "PASS",
+          "The UI rejects SUMMER-2026 before checkout."
+        ],
+        [
+          "PASS",
+          "/api/validate-coupon rejects the same unknown coupon."
+        ],
+        [
+          "PASS",
+          "Checkout no longer receives a coupon that entry validation accepted incorrectly."
+        ]
+      ],
+      "verdict": "winner",
+      "decision": "This fixes the invariant: unknown coupons must be rejected before checkout by every validation path."
+    }
+  ],
+  "validatorForks": [
+    [
+      "api-design-review",
+      360,
+      "checks API semantics"
+    ],
+    [
+      "implementation-review",
+      410,
+      "checks shared-contract implementation"
+    ],
+    [
+      "regression-test-builder",
+      480,
+      "adds explicit coupon regression coverage"
+    ]
+  ],
+  "winner": "contract-hypothesis",
+  "recommendedNextState": "contract-with-regression-test",
+  "metrics": [
+    {
+      "operation": "parse codex-style prompt",
+      "branch": "coupon-parent-prepared",
+      "latencyMs": 12,
+      "detail": "read bug and hypothesis request",
+      "at": "2026-07-07T00:43:29.698Z"
+    },
+    {
+      "operation": "inspect prepared parent state",
+      "branch": "coupon-parent-prepared",
+      "latencyMs": 180,
+      "detail": "state manifest and artifacts present",
+      "at": "2026-07-07T00:43:29.698Z"
+    },
+    {
+      "operation": "codex fork hypothesis",
+      "branch": "frontend-hypothesis",
+      "latencyMs": 420,
+      "detail": "frontend validation",
+      "at": "2026-07-07T00:43:29.702Z"
+    },
+    {
+      "operation": "codex fork hypothesis",
+      "branch": "backend-hypothesis",
+      "latencyMs": 470,
+      "detail": "backend checkout/API validation",
+      "at": "2026-07-07T00:43:29.702Z"
+    },
+    {
+      "operation": "codex fork hypothesis",
+      "branch": "contract-hypothesis",
+      "latencyMs": 510,
+      "detail": "shared coupon contract/schema",
+      "at": "2026-07-07T00:43:29.702Z"
+    },
+    {
+      "operation": "codex test hypothesis",
+      "branch": "frontend-hypothesis",
+      "latencyMs": 240,
+      "detail": "partial",
+      "at": "2026-07-07T00:43:29.702Z"
+    },
+    {
+      "operation": "codex test hypothesis",
+      "branch": "backend-hypothesis",
+      "latencyMs": 260,
+      "detail": "partial",
+      "at": "2026-07-07T00:43:29.702Z"
+    },
+    {
+      "operation": "codex test hypothesis",
+      "branch": "contract-hypothesis",
+      "latencyMs": 310,
+      "detail": "winner",
+      "at": "2026-07-07T00:43:29.702Z"
+    },
+    {
+      "operation": "codex write candidate fix",
+      "branch": "contract-hypothesis",
+      "latencyMs": 620,
+      "detail": "fix-candidate.md created",
+      "at": "2026-07-07T00:43:29.703Z"
+    },
+    {
+      "operation": "codex fork contract candidate",
+      "branch": "contract-minimal",
+      "latencyMs": 330,
+      "detail": "smallest correct shared-contract fix",
+      "at": "2026-07-07T00:43:29.703Z"
+    },
+    {
+      "operation": "codex fork contract candidate",
+      "branch": "contract-with-regression-test",
+      "latencyMs": 390,
+      "detail": "contract fix plus regression coverage",
+      "at": "2026-07-07T00:43:29.703Z"
+    },
+    {
+      "operation": "codex fork validator",
+      "branch": "api-design-review",
+      "latencyMs": 360,
+      "detail": "checks API semantics",
+      "at": "2026-07-07T00:43:29.703Z"
+    },
+    {
+      "operation": "codex fork validator",
+      "branch": "implementation-review",
+      "latencyMs": 410,
+      "detail": "checks shared-contract implementation",
+      "at": "2026-07-07T00:43:29.703Z"
+    },
+    {
+      "operation": "codex fork validator",
+      "branch": "regression-test-builder",
+      "latencyMs": 480,
+      "detail": "adds explicit coupon regression coverage",
+      "at": "2026-07-07T00:43:29.703Z"
+    },
+    {
+      "operation": "codex validator decision",
+      "branch": "contract-candidate-fix",
+      "latencyMs": 260,
+      "detail": "all validator branches green-light the shared-contract path",
+      "at": "2026-07-07T00:43:29.703Z"
+    }
+  ],
+  "elapsedMs": 7,
+  "totalDisplayedMs": 5252
+}

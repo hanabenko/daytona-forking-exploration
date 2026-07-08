@@ -1,0 +1,103 @@
+{
+  "generatedAt": "2026-07-02T15:38:00.000Z",
+  "redaction": "No API key or secret value is stored in this file.",
+  "accountScope": "Observed with the provided Daytona API key on 2026-07-02.",
+  "availablePath": {
+    "target": "us",
+    "snapshot": "daytonaio/sandbox:0.8.0",
+    "sandboxClass": "container",
+    "results": [
+      {
+        "operation": "Create default container sandbox",
+        "status": "ok",
+        "seconds": 0.384
+      },
+      {
+        "operation": "Write prepared filesystem state",
+        "status": "ok",
+        "seconds": 1.012
+      },
+      {
+        "operation": "Stop parent",
+        "status": "ok",
+        "seconds": 2.14
+      },
+      {
+        "operation": "Start same parent",
+        "status": "ok",
+        "seconds": 0.883
+      },
+      {
+        "operation": "Verify marker after stop/start",
+        "status": "ok",
+        "seconds": 0.278,
+        "observation": "state-marker persisted across stop/start"
+      },
+      {
+        "operation": "Try fork default container parent",
+        "status": "failed",
+        "seconds": 0.202,
+        "error": "Forking is not supported for this sandbox"
+      },
+      {
+        "operation": "Try pause default container parent",
+        "status": "failed",
+        "seconds": 0.105,
+        "error": "Pausing is not supported for this sandbox"
+      },
+      {
+        "operation": "Stop parent before filesystem snapshot",
+        "status": "ok",
+        "seconds": 3.724
+      },
+      {
+        "operation": "Create filesystem snapshot from stopped container",
+        "status": "client-timeout",
+        "seconds": 181.13,
+        "error": "Sandbox snapshot did not complete within the timeout period",
+        "laterObservation": "Sandbox later transitioned from snapshotting to stopped and generated an active snapshot.",
+        "approxObservedCompletionSeconds": 297.3
+      }
+    ]
+  },
+  "blockedForkPath": {
+    "prebuiltVmSnapshotUs": {
+      "snapshot": "daytona-vm-small",
+      "target": "us",
+      "status": "failed",
+      "seconds": 0.303,
+      "error": "Snapshot daytona-vm-small is not available in region us"
+    },
+    "prebuiltVmSnapshotEu": {
+      "snapshot": "daytona-vm-small",
+      "target": "eu",
+      "status": "failed",
+      "seconds": 0.636,
+      "error": "Snapshot daytona-vm-small is not available in region eu"
+    },
+    "temporaryVmSnapshotUs": {
+      "snapshotClass": "linux-vm",
+      "target": "us",
+      "status": "failed",
+      "seconds": 0.458,
+      "error": "No runners are configured in region 'us' for sandbox class 'linux-vm'. Try a different region or sandbox class."
+    },
+    "temporaryVmSnapshotEu": {
+      "snapshotClass": "linux-vm",
+      "target": "eu",
+      "status": "failed",
+      "seconds": 0.316,
+      "error": "Region eu is not available to the organization"
+    }
+  },
+  "cleanup": {
+    "sandboxesRemainingAfterProbe": 0,
+    "couponSnapshotsRemainingAfterProbe": 0
+  },
+  "planImpact": [
+    "Keep the browser key flow, but show a clear blocked state when the account lacks a fork-capable runner.",
+    "Use live Daytona in this account for stop/start filesystem persistence and lifecycle latency evidence.",
+    "Do not present live fork, pause, or memory-state preservation as proven with this key.",
+    "For a post/video showing real fork IDs, run the same demo in a Daytona account or target with fork-capable VM support enabled."
+  ]
+}

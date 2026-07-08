@@ -1,0 +1,599 @@
+{
+  "mode": "live",
+  "generatedAt": "2026-07-07T22:48:39.919Z",
+  "headline": "Prepared parent sandbox branches into coupon debugging hypotheses.",
+  "agentPattern": {
+    "title": "Better fork point: after useful disk or memory state exists",
+    "originalComment": "Imagine an agent that has already identified the files responsible for a failing test. Rather than assigning three agents to independently rediscover the same information, a single agent performs the exploration once before forking into specialized workers.",
+    "feedbackIncorporated": "The demo makes that stronger by having the parent write durable state first: failing logs, debug brief, state manifest, benchmark output, and a candidate shared-contract fix. It also includes a memory probe that attempts to fork after warming live process memory, while logging the observed result instead of overclaiming support.",
+    "candidateFixState": [
+      "src/shared/couponContract.js changed to validate against seeded coupon data",
+      "debug-brief.md updated with the winning contract hypothesis",
+      ".artifacts/logs/failing-baseline.txt preserved for comparison",
+      "state-manifest.json records the prepared parent state",
+      "fix-candidate.md explains why this branch should be reviewed",
+      "optional memory-agent process warmed before the memory probe fork"
+    ]
+  },
+  "liveRun": {
+    "status": "complete",
+    "runId": "coupon-2026-07-07T22-47-37-439Z",
+    "apiKeyConfigured": true,
+    "sdkInstalled": true,
+    "lastUpdated": "2026-07-07T22:48:39.919Z",
+    "logPath": ".artifacts/logs/daytona-live-run.txt",
+    "latencyPath": ".artifacts/logs/daytona-live-latency.json",
+    "blocker": null,
+    "cleanup": "Cleanup completed; deleted 6 sandboxes.",
+    "parentSandboxId": "aa55a398-3715-40ec-920b-1c7391cfd6e3",
+    "target": "us-east-1",
+    "baseSnapshot": "daytona-vm-medium",
+    "createdSnapshot": "Not run in recording profile",
+    "baseSnapshotCandidates": [
+      "daytona-vm-medium",
+      "daytona-vm-small",
+      "daytona-vm",
+      "daytona-vm-large",
+      "daytona-vm-ubuntu-xxl"
+    ],
+    "autoStopMinutes": 15,
+    "openAiCacheProbe": ".artifacts/logs/openai-cache-probe.json"
+  },
+  "parentState": [
+    [
+      "Repo files",
+      "yes"
+    ],
+    [
+      "Dependencies installed",
+      "yes"
+    ],
+    [
+      "Build artifacts",
+      "yes"
+    ],
+    [
+      "Seeded coupon data",
+      "yes"
+    ],
+    [
+      "Failing baseline logs",
+      "yes"
+    ],
+    [
+      "Debug brief",
+      "yes"
+    ],
+    [
+      "State marker",
+      "yes"
+    ],
+    [
+      "Benchmark output",
+      "yes"
+    ]
+  ],
+  "nodes": [
+    {
+      "name": "coupon-parent-prepared",
+      "kind": "parent",
+      "status": "prepared live",
+      "sandboxId": "aa55a398-3715-40ec-920b-1c7391cfd6e3",
+      "summary": "Live Daytona parent contains prepared coupon state before fork.",
+      "changedFiles": [
+        "state-marker.txt",
+        "debug-brief.md",
+        ".artifacts/logs/failing-baseline.txt"
+      ],
+      "testStatus": "baseline failing log written",
+      "verdict": "Ready to fork"
+    },
+    {
+      "name": "frontend-hypothesis",
+      "parent": "coupon-parent-prepared",
+      "kind": "hypothesis",
+      "status": "live fork",
+      "sandboxId": "d7c4a7bd-075d-433d-b232-ba72ea6e7f7b",
+      "summary": "Live child fork wrote frontend-specific fork-note.txt.",
+      "changedFiles": [
+        "src/client/app.js"
+      ],
+      "testStatus": "UI improves; API contract still fails",
+      "verdict": "Partial"
+    },
+    {
+      "name": "backend-hypothesis",
+      "parent": "coupon-parent-prepared",
+      "kind": "hypothesis",
+      "status": "live fork",
+      "sandboxId": "3842cbe8-4ba8-4b88-81a3-9371b52e92a5",
+      "summary": "Live child fork wrote backend-specific fork-note.txt.",
+      "changedFiles": [
+        "src/server/app.js"
+      ],
+      "testStatus": "API improves; UI remains confusing",
+      "verdict": "Partial"
+    },
+    {
+      "name": "contract-hypothesis",
+      "parent": "coupon-parent-prepared",
+      "kind": "hypothesis",
+      "status": "live winning branch",
+      "sandboxId": "11227dcd-89e0-486f-9f8e-80460e7c0452",
+      "summary": "Live child fork wrote contract-specific fork-note.txt.",
+      "changedFiles": [
+        "src/shared/couponContract.js",
+        "src/server/app.js"
+      ],
+      "testStatus": "UI/API/e2e pass after shared fix",
+      "verdict": "Best"
+    },
+    {
+      "name": "contract-minimal",
+      "parent": "contract-hypothesis",
+      "kind": "refinement",
+      "status": "live fork of fork",
+      "sandboxId": "9ff30904-9da3-4095-8b59-38378bc7524d",
+      "summary": "Smallest correct shared contract fix.",
+      "changedFiles": [
+        "src/shared/couponContract.js"
+      ],
+      "testStatus": "existing tests pass",
+      "verdict": "Good hotfix"
+    },
+    {
+      "name": "contract-with-regression-test",
+      "parent": "contract-hypothesis",
+      "kind": "refinement",
+      "status": "live fork of fork",
+      "sandboxId": "1761a072-9a2b-45e5-b9d4-3706ad2b5986",
+      "summary": "Shared fix plus explicit invalid coupon regression coverage.",
+      "changedFiles": [
+        "src/shared/couponContract.js",
+        "tests/*.test.js"
+      ],
+      "testStatus": "regression suite passes",
+      "verdict": "Recommended"
+    }
+  ],
+  "forkTreeLevels": [
+    {
+      "level": 0,
+      "title": "Prepared parent",
+      "why": "The parent is useful before branching: repo, dependencies, build, seeded data, failing logs, debug brief, marker, and benchmark output already exist.",
+      "nodes": [
+        {
+          "name": "coupon-parent-prepared",
+          "parent": "base sandbox",
+          "sandboxId": "aa55a398-3715-40ec-920b-1c7391cfd6e3",
+          "status": "prepared live",
+          "writes": [
+            "state-marker.txt",
+            "debug-brief.md",
+            ".artifacts/logs/failing-baseline.txt"
+          ],
+          "inherits": [
+            "base snapshot",
+            "Daytona sandbox config"
+          ],
+          "whyItMatters": "Live Daytona parent now contains prepared coupon state before fork."
+        }
+      ]
+    },
+    {
+      "level": 1,
+      "title": "Hypothesis forks",
+      "why": "Three independent futures branch from the same prepared disk state and test different explanations.",
+      "nodes": [
+        {
+          "name": "frontend-hypothesis",
+          "parent": "coupon-parent-prepared",
+          "sandboxId": "d7c4a7bd-075d-433d-b232-ba72ea6e7f7b",
+          "status": "live fork",
+          "writes": [
+            "src/client/app.js"
+          ],
+          "inherits": [
+            "prepared repo",
+            "failing logs",
+            "debug brief",
+            "seeded data"
+          ],
+          "whyItMatters": "Live child fork wrote frontend-specific fork-note.txt."
+        },
+        {
+          "name": "backend-hypothesis",
+          "parent": "coupon-parent-prepared",
+          "sandboxId": "3842cbe8-4ba8-4b88-81a3-9371b52e92a5",
+          "status": "live fork",
+          "writes": [
+            "src/server/app.js"
+          ],
+          "inherits": [
+            "prepared repo",
+            "failing logs",
+            "debug brief",
+            "seeded data"
+          ],
+          "whyItMatters": "Live child fork wrote backend-specific fork-note.txt."
+        },
+        {
+          "name": "contract-hypothesis",
+          "parent": "coupon-parent-prepared",
+          "sandboxId": "11227dcd-89e0-486f-9f8e-80460e7c0452",
+          "status": "live winning branch",
+          "writes": [
+            "src/shared/couponContract.js",
+            "fix-candidate.md"
+          ],
+          "inherits": [
+            "prepared repo",
+            "failing logs",
+            "debug brief",
+            "seeded data"
+          ],
+          "whyItMatters": "Live contract branch wrote fix-candidate.md and became the next fork point."
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "title": "Fork from the changed contract branch",
+      "why": "The winning branch is not just copied from the original baseline; it becomes a new parent after writing the candidate fix.",
+      "nodes": [
+        {
+          "name": "contract-candidate-fix",
+          "parent": "contract-hypothesis",
+          "sandboxId": "11227dcd-89e0-486f-9f8e-80460e7c0452",
+          "status": "candidate fix written",
+          "writes": [
+            "fix-candidate.md",
+            "contract fork note"
+          ],
+          "inherits": [
+            "prepared parent state",
+            "shared-contract change"
+          ],
+          "whyItMatters": "Live branch now has changed filesystem state that refinements and validators inherit."
+        },
+        {
+          "name": "contract-minimal",
+          "parent": "contract-hypothesis",
+          "sandboxId": "9ff30904-9da3-4095-8b59-38378bc7524d",
+          "status": "live fork of fork",
+          "writes": [
+            "src/shared/couponContract.js"
+          ],
+          "inherits": [
+            "prepared parent state",
+            "fix-candidate.md"
+          ],
+          "whyItMatters": "Live refinement inherits the candidate contract fix and isolates the smallest patch."
+        },
+        {
+          "name": "contract-with-regression-test",
+          "parent": "contract-hypothesis",
+          "sandboxId": "1761a072-9a2b-45e5-b9d4-3706ad2b5986",
+          "status": "live fork of fork",
+          "writes": [
+            "src/shared/couponContract.js",
+            "tests/*.test.js"
+          ],
+          "inherits": [
+            "prepared parent state",
+            "fix-candidate.md"
+          ],
+          "whyItMatters": "Live refinement inherits the candidate contract fix and adds regression coverage separately."
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "title": "Validator fan-out from candidate state",
+      "why": "Specialized workers start from the actual changed branch, so they review the fix instead of rediscovering the bug.",
+      "nodes": [
+        {
+          "name": "api-design-review",
+          "parent": "contract-candidate-fix",
+          "sandboxId": "20a63416-8f4f-4ec1-8f8e-075faa04df66",
+          "status": "green-light",
+          "writes": [
+            "api-review.md"
+          ],
+          "inherits": [
+            "fix-candidate.md",
+            "failing logs",
+            "debug brief"
+          ],
+          "whyItMatters": "Live API reviewer green-lit invalid coupon behavior."
+        },
+        {
+          "name": "implementation-review",
+          "parent": "contract-candidate-fix",
+          "sandboxId": "37f247c7-b654-4a66-bf5d-21c746e5d9e2",
+          "status": "green-light",
+          "writes": [
+            "implementation-review.md"
+          ],
+          "inherits": [
+            "fix-candidate.md",
+            "seeded data",
+            "build artifacts"
+          ],
+          "whyItMatters": "Live implementation reviewer green-lit the minimal shared contract fix."
+        },
+        {
+          "name": "regression-test-builder",
+          "parent": "contract-candidate-fix",
+          "sandboxId": "eaf56160-867c-4375-b268-823962c5b762",
+          "status": "green-light",
+          "writes": [
+            "regression-tests.md"
+          ],
+          "inherits": [
+            "fix-candidate.md",
+            "test suite",
+            "failing baseline output"
+          ],
+          "whyItMatters": "Live test builder green-lit explicit invalid coupon coverage."
+        }
+      ]
+    },
+    {
+      "level": 4,
+      "title": "Runtime-state observation",
+      "why": "A memory probe branches after a process is warmed, then records what the runner actually preserved.",
+      "nodes": [
+        {
+          "name": "memory-state-check",
+          "parent": "contract-candidate-fix",
+          "sandboxId": "ed6393f6-f0b2-4d82-adbb-60cfc741d72f",
+          "status": "observed",
+          "writes": [
+            ".artifacts/logs/memory-agent.log"
+          ],
+          "inherits": [
+            "fix-candidate.md",
+            "warmed memory-agent process attempt"
+          ],
+          "whyItMatters": "Live child observed the warmed memory-agent state for this run."
+        }
+      ]
+    }
+  ],
+  "cloneComparison": {
+    "cloneFanOut": {
+      "title": "Three concurrent clones",
+      "summary": "All workers start from the original baseline and must recreate or receive the intermediate fix context.",
+      "tree": "baseline\n├── clone A: API review rediscovers context\n├── clone B: implementation review rediscovers context\n└── clone C: tests rebuild candidate assumptions",
+      "limits": [
+        "No clone naturally inherits the changed contract branch unless you rebuild or ship that state.",
+        "The candidate fix is not a new branch point; it is duplicated manually.",
+        "A failed validator has a less precise parent to return to."
+      ]
+    },
+    "forkedStateTree": {
+      "title": "Multi-level fork tree",
+      "summary": "The contract branch writes the candidate fix first, then validators fork from that exact changed state.",
+      "tree": "prepared baseline\n└── contract-hypothesis\n    └── contract-candidate-fix\n        ├── api-design-review\n        ├── implementation-review\n        ├── regression-test-builder",
+      "benefits": [
+        "Intermediate work becomes the next fork point.",
+        "Validators inherit files, logs, and candidate fix artifacts directly."
+      ]
+    }
+  },
+  "validatorWorkers": [
+    {
+      "name": "api-design-review",
+      "parent": "contract-candidate-fix",
+      "strategy": "Check whether the API contract now reports Invalid coupon code before checkout.",
+      "inherits": "candidate shared-contract fix + failing baseline log + debug brief",
+      "output": "api-review.md",
+      "greenLight": true,
+      "verdict": "Live reviewer green-lit API behavior.",
+      "sandboxId": "20a63416-8f4f-4ec1-8f8e-075faa04df66"
+    },
+    {
+      "name": "implementation-review",
+      "parent": "contract-candidate-fix",
+      "strategy": "Inspect edge cases in normalization, seeded coupon lookup, and checkout totals.",
+      "inherits": "candidate shared-contract fix + seeded coupon data + build artifacts",
+      "output": "implementation-review.md",
+      "greenLight": true,
+      "verdict": "Live reviewer green-lit implementation shape.",
+      "sandboxId": "37f247c7-b654-4a66-bf5d-21c746e5d9e2"
+    },
+    {
+      "name": "regression-test-builder",
+      "parent": "contract-candidate-fix",
+      "strategy": "Add tests that prove SUMMER-2026 fails during validation, not checkout.",
+      "inherits": "candidate shared-contract fix + test suite + failing baseline output",
+      "output": "regression-tests.md",
+      "greenLight": true,
+      "verdict": "Live reviewer green-lit regression coverage.",
+      "sandboxId": "eaf56160-867c-4375-b268-823962c5b762"
+    }
+  ],
+  "memoryProbe": {
+    "name": "memory-state-check",
+    "status": "pending",
+    "forkPoint": "contract-candidate-fix after memory-agent warmup",
+    "whatChangesBeforeFork": "A Node process increments in-memory state without writing that counter to disk.",
+    "expectedObservation": "If live process memory is preserved by this fork operation, the child can query the warmed memory-agent process.",
+    "result": "Waiting for contract candidate branch."
+  },
+  "forkEvents": [
+    {
+      "at": "2026-07-07T22:47:39.944Z",
+      "fork": "coupon-parent-prepared",
+      "from": "base sandbox",
+      "sandboxId": "aa55a398-3715-40ec-920b-1c7391cfd6e3",
+      "parentSandboxId": null,
+      "inheritedState": [
+        "base snapshot",
+        "Daytona sandbox config"
+      ],
+      "action": "prepare baseline state",
+      "result": "wrote repo packet, seeded data, build marker, debug brief, failing logs, state manifest, and benchmark JSON",
+      "status": "prepared"
+    },
+    {
+      "at": "2026-07-07T22:47:59.744Z",
+      "fork": "frontend-hypothesis",
+      "from": "coupon-parent-prepared",
+      "sandboxId": "d7c4a7bd-075d-433d-b232-ba72ea6e7f7b",
+      "parentSandboxId": "aa55a398-3715-40ec-920b-1c7391cfd6e3",
+      "inheritedState": [
+        "repo files",
+        "installed dependencies",
+        "build artifacts",
+        "seeded coupon data",
+        "failing logs",
+        "debug brief",
+        "state marker",
+        "benchmark output"
+      ],
+      "action": "write frontend-specific fork-note.txt",
+      "result": "client-validation strategy branch created",
+      "status": "forked"
+    },
+    {
+      "at": "2026-07-07T22:48:00.701Z",
+      "fork": "backend-hypothesis",
+      "from": "coupon-parent-prepared",
+      "sandboxId": "3842cbe8-4ba8-4b88-81a3-9371b52e92a5",
+      "parentSandboxId": "aa55a398-3715-40ec-920b-1c7391cfd6e3",
+      "inheritedState": [
+        "repo files",
+        "installed dependencies",
+        "build artifacts",
+        "seeded coupon data",
+        "failing logs",
+        "debug brief",
+        "state marker",
+        "benchmark output"
+      ],
+      "action": "write backend-specific fork-note.txt",
+      "result": "API/checkout strategy branch created",
+      "status": "forked"
+    },
+    {
+      "at": "2026-07-07T22:48:01.707Z",
+      "fork": "contract-hypothesis",
+      "from": "coupon-parent-prepared",
+      "sandboxId": "11227dcd-89e0-486f-9f8e-80460e7c0452",
+      "parentSandboxId": "aa55a398-3715-40ec-920b-1c7391cfd6e3",
+      "inheritedState": [
+        "repo files",
+        "installed dependencies",
+        "build artifacts",
+        "seeded coupon data",
+        "failing logs",
+        "debug brief",
+        "state marker",
+        "benchmark output"
+      ],
+      "action": "write contract fork note and fix-candidate.md",
+      "result": "candidate shared-contract fix branch created",
+      "status": "forked"
+    },
+    {
+      "at": "2026-07-07T22:48:22.118Z",
+      "fork": "contract-minimal",
+      "from": "contract-hypothesis",
+      "sandboxId": "9ff30904-9da3-4095-8b59-38378bc7524d",
+      "parentSandboxId": "11227dcd-89e0-486f-9f8e-80460e7c0452",
+      "inheritedState": [
+        "repo files",
+        "installed dependencies",
+        "build artifacts",
+        "seeded coupon data",
+        "failing logs",
+        "debug brief",
+        "state marker",
+        "benchmark output",
+        "contract fork note",
+        "fix-candidate.md"
+      ],
+      "action": "write refinement.txt",
+      "result": "minimal fix refinement created from contract candidate",
+      "status": "forked"
+    },
+    {
+      "at": "2026-07-07T22:48:23.298Z",
+      "fork": "contract-with-regression-test",
+      "from": "contract-hypothesis",
+      "sandboxId": "1761a072-9a2b-45e5-b9d4-3706ad2b5986",
+      "parentSandboxId": "11227dcd-89e0-486f-9f8e-80460e7c0452",
+      "inheritedState": [
+        "repo files",
+        "installed dependencies",
+        "build artifacts",
+        "seeded coupon data",
+        "failing logs",
+        "debug brief",
+        "state marker",
+        "benchmark output",
+        "contract fork note",
+        "fix-candidate.md"
+      ],
+      "action": "write refinement.txt",
+      "result": "regression-test refinement created from contract candidate",
+      "status": "forked"
+    }
+  ],
+  "steps": [
+    [
+      "Prepare parent",
+      "complete",
+      "state packet, logs, marker, manifest, and benchmark exist"
+    ],
+    [
+      "Fork hypotheses",
+      "complete",
+      "three live child sandboxes created"
+    ],
+    [
+      "Fork a fork",
+      "complete",
+      "two live refinements created from contract branch"
+    ],
+    [
+      "Apply candidate fix",
+      "complete",
+      "contract branch wrote fix-candidate.md before more forks"
+    ],
+    [
+      "Validator fan-out",
+      "documented",
+      "available with --full-tree"
+    ],
+    [
+      "Memory probe",
+      "documented",
+      "available with --full-tree"
+    ],
+    [
+      "Snapshot baseline",
+      "documented",
+      "available with --full-tree"
+    ],
+    [
+      "Live Daytona run",
+      "complete",
+      "Cleanup completed; deleted 6 sandboxes."
+    ]
+  ],
+  "terminals": [
+    {
+      "title": "daytona inspect-state",
+      "command": "sandbox.process.executeCommand('node scripts/inspect-state.js')",
+      "output": "repo present: yes\ndependencies installed: yes\nbuild artifacts present: yes\nseeded coupon data present: yes\ndebug-brief.md present: yes\nfailing baseline log present: yes\nstate-marker.txt present: yes\nenv configured: yes\napp can start: yes\n"
+    },
+    {
+      "title": "advanced Daytona probe",
+      "command": "optional: open the advanced Daytona probe and enter a dtn_ key",
+      "output": "This is separate from the recommended recording path. npm run demo:agent uses the OpenAI key from .env; the advanced probe expects a Daytona dtn_ key."
+    }
+  ]
+}

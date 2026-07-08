@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Live Daytona Forking Run</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --ink: #ffffff;
+        --muted: #a2a2a2;
+        --line: #414141;
+        --page: #0a0a0a;
+        --panel: #161616;
+        --blue: #2ecc71;
+        --green: #2ecc71;
+        --amber: #f1c40f;
+        --red: #e74c3c;
+        --terminal: #0a0a0a;
+        --surface-soft: #252525;
+        --green-bright: #00e49a;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--page);
+        color: var(--ink);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      main { width: 1000px; margin: 0 auto; padding: 34px; }
+      h1 { margin: 0; font-size: 34px; line-height: 1.05; letter-spacing: 0; }
+      h2, h3, p { margin: 0; }
+      .eyebrow {
+        margin: 0 0 8px;
+        color: var(--blue);
+        font-size: 13px;
+        font-weight: 900;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+      .sub { margin: 10px 0 22px; color: var(--muted); font-size: 15px; line-height: 1.45; }
+      .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+      .metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 18px 0; }
+      .metric, .card {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+        padding: 16px;
+      }
+      .metric span {
+        display: block;
+        margin-bottom: 6px;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+      .metric strong { font-size: 24px; }
+      .terminal {
+        margin-top: 16px;
+        padding: 18px;
+        border-radius: 8px;
+        background: var(--terminal);
+        color: #fafafa;
+        font: 12px/1.38 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        white-space: pre-wrap;
+      }
+      .terminal .dim { color: var(--muted); }
+      .terminal .ok { color: var(--green-bright); }
+      .terminal .warn { color: #fcd34d; }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+      }
+      th, td { padding: 11px 13px; border-bottom: 1px solid var(--line); text-align: left; font-size: 13px; }
+      th { color: var(--ink); background: var(--surface-soft); font-size: 12px; text-transform: uppercase; }
+      .bar-wrap { width: 100%; height: 10px; border-radius: 999px; background: var(--surface-soft); }
+      .bar { height: 10px; border-radius: 999px; background: var(--blue); }
+      .fork-tree {
+        position: relative;
+        height: 650px;
+        margin-top: 20px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+      }
+      .node {
+        position: absolute;
+        width: 190px;
+        padding: 14px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+        box-shadow: 0 12px 28px rgb(30 36 48 / 8%);
+      }
+      .node strong { display: block; margin-bottom: 6px; font-size: 15px; }
+      .node p { color: var(--muted); font-size: 12px; line-height: 1.35; }
+      .node.parent { left: 385px; top: 26px; border-color: var(--green); background: color-mix(in srgb, var(--green) 13%, var(--panel)); }
+      .node.frontend { left: 60px; top: 220px; }
+      .node.backend { left: 385px; top: 220px; }
+      .node.contract { left: 710px; top: 220px; border-color: var(--green); background: color-mix(in srgb, var(--green) 13%, var(--panel)); }
+      .node.minimal { left: 560px; top: 470px; }
+      .node.regression { left: 760px; top: 470px; border-color: var(--green); background: color-mix(in srgb, var(--green) 13%, var(--panel)); }
+      .line {
+        position: absolute;
+        height: 2px;
+        background: var(--line);
+        transform-origin: left center;
+      }
+      .l1 { left: 480px; top: 148px; width: 340px; transform: rotate(27deg); }
+      .l2 { left: 480px; top: 148px; width: 170px; transform: rotate(90deg); }
+      .l3 { left: 480px; top: 148px; width: 340px; transform: rotate(153deg); }
+      .l4 { left: 805px; top: 348px; width: 170px; transform: rotate(128deg); }
+      .l5 { left: 805px; top: 348px; width: 150px; transform: rotate(55deg); }
+      .caption { margin-top: 14px; color: var(--muted); font-size: 13px; line-height: 1.45; }
+      .semantic-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
+      .semantic-grid img { width: 100%; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); }
+    </style>
+  </head>
+  <body>
+    <main><p class="eyebrow">Live recording path</p>
+      <h1>Prepared Parent, Hypothesis Forks, Fork-A-Fork</h1>
+      <p class="sub">Current demo command: <code>npm run demo:codex:live</code>. The default path stops after the multi-level fork tree to stay under the Daytona CPU limit.</p>
+      <section class="terminal">Starting Daytona live run coupon-2026-07-07T22-47-37-439Z
+Effective target: us-east-1
+Sandbox auto-stop: 15 minutes
+[latency] create parent sandbox (daytona-vm-medium): 1.659s
+
+$ prepare parent state
+repo present: yes
+dependencies installed: yes
+build artifacts present: yes
+seeded coupon data present: yes
+debug-brief.md present: yes
+failing baseline log present: yes
+state-marker.txt present: yes
+env configured: yes
+app can start: yes
+
+[latency] prepare parent state: 0.817s
+
+------------------------------------------------------------------------------
+[explain] 1. Prepared parent captured
+  parent sandbox: aa55a398-3715-40ec-920b-1c7391cfd6e3
+  base snapshot: daytona-vm-medium
+  auto-stop: 15 minutes of inactivity for parent and spawned forks
+  The parent now contains useful debugging state before any branch exists.
+  State reused by children: repo packet, seeded data, failing log, debug brief, marker, manifest, and benchmark JSON.
+  Agent reasoning: do the expensive setup and bug reproduction once, then fork from evidence instead of rediscovering it.
+  Next: fork this prepared state into independent hypothesis sandboxes.
+------------------------------------------------------------------------------
+[autostop] d7c4a7bd-075d-433d-b232-ba72ea6e7f7b: 15 minutes
+[latency] fork frontend-hypothesis: 0.756s
+
+$ mark frontend fork
+
+[latency] mark frontend fork: 0.345s
+[autostop] 3842cbe8-4ba8-4b88-81a3-9371b52e92a5: 15 minutes
+[latency] fork backend-hypothesis: 0.784s
+
+$ mark backend fork
+
+[latency] mark backend fork: 0.171s
+[autostop] 11227dcd-89e0-486f-9f8e-80460e7c0452: 15 minutes
+[latency] fork contract-hypothesis: 0.72s
+
+$ mark contract fork
+
+[latency] mark contract fork: 0.174s
+
+$ write candidate fix state
+
+[latency] write candidate fix state: 0.11s
+
+------------------------------------------------------------------------------
+[explain] 2. Hypothesis forks created
+  frontend-hypothesis (d7c4a7bd-075d-433d-b232-ba72ea6e7f7b): UI-only validation can improve the form, but the API can still disagree.
+  backend-hypothesis (3842cbe8-4ba8-4b88-81a3-9371b52e92a5): checkout/API handling can improve late errors, but the UI can still accept bad state.
+  contract-hypothesis (11227dcd-89e0-486f-9f8e-80460e7c0452): shared validation fixes the invariant across UI and API.
+  Agent reasoning: continue from contract-hypothesis because it fixes the disagreement, not just one visible symptom.
+  New state before the next fork: fix-candidate.md is written inside the contract branch.
+  OpenAI cache: child prompts reused 14,976 of 15,470 input tokens (97%).
+------------------------------------------------------------------------------
+[autostop] 9ff30904-9da3-4095-8b59-38378bc7524d: 15 minutes
+[latency] fork contract-minimal: 0.896s
+
+$ mark minimal refinement
+
+[latency] mark minimal refinement: 0.315s
+[autostop] 1761a072-9a2b-45e5-b9d4-3706ad2b5986: 15 minutes
+[latency] fork contract-with-regression-test: 1.013s
+
+$ mark regression refinement
+
+[latency] mark regression refinement: 0.165s
+
+------------------------------------------------------------------------------
+[explain] 3. Fork a fork
+  contract-minimal (9ff30904-9da3-4095-8b59-38378bc7524d): explore the smallest shared-contract patch.
+  contract-with-regression-test (1761a072-9a2b-45e5-b9d4-3706ad2b5986): explore the same fix plus explicit SUMMER-2026 regression coverage.
+  Both children inherit the changed contract branch, including fix-candidate.md.
+  Agent reasoning: fork the changed branch so refinements start after the likely fix, not from the original bug baseline.
+  This is the reason to fork instead of launching unrelated fresh clones.
+  OpenAI cache: child prompts reused 7,424 of 7,869 input tokens (94%).
+------------------------------------------------------------------------------</section></main>
+  </body>
+</html>

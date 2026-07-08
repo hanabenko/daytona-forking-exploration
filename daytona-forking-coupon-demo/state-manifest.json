@@ -1,0 +1,22 @@
+{
+  "sandboxName": "coupon-parent-prepared",
+  "preparedState": {
+    "repoFiles": true,
+    "dependenciesInstalled": true,
+    "buildArtifacts": true,
+    "seededCouponData": true,
+    "failingTestLogs": true,
+    "debugBrief": true,
+    "stateMarker": true,
+    "benchmarkOutput": true
+  },
+  "validCoupon": "SAVE10",
+  "invalidCoupon": "SUMMER-2026",
+  "forksToExplore": [
+    "frontend-hypothesis",
+    "backend-hypothesis",
+    "contract-hypothesis",
+    "contract-minimal",
+    "contract-with-regression-test"
+  ]
+}

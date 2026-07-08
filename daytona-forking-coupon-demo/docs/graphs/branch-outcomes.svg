@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Branch Outcomes</title>
+  <desc id="desc">The useful fork is the one that makes UI and API behavior consistent, not just less confusing.</desc>
+  <style>
+    .bg { fill: #0a0a0a; }
+    .panel { fill: #161616; stroke: #414141; stroke-width: 1.5; rx: 8; }
+    .ink { fill: #ffffff; font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .muted { fill: #a2a2a2; font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .title { font-size: 34px; font-weight: 800; letter-spacing: 0; }
+    .subtitle { font-size: 16px; letter-spacing: 0; }
+    .label { font-size: 16px; font-weight: 800; letter-spacing: 0; }
+    .small { font-size: 13px; letter-spacing: 0; }
+    .tiny { font-size: 11px; letter-spacing: 0; }
+    .line { stroke: #414141; stroke-width: 2; fill: none; }
+    .blue { fill: #2ecc71; }
+    .green { fill: #00e49a; }
+    .amber { fill: #f1c40f; }
+    .red { fill: #e74c3c; }
+    .soft-blue { fill: #102017; stroke: #2ecc71; }
+    .soft-green { fill: #102017; stroke: #2ecc71; }
+    .soft-amber { fill: #211d0f; stroke: #f1c40f; }
+    .soft-red { fill: #211013; stroke: #e74c3c; }
+    .soft-gray { fill: #111111; stroke: #414141; }
+  </style>
+  <rect class="bg" width="1200" height="720"/>
+  <text class="ink title" x="56" y="58">Branch Outcomes</text>
+  <text class="muted subtitle" x="56" y="88">The useful fork is the one that makes UI and API behavior consistent, not just less confusing.</text>
+  <rect class="panel" x="64" y="142" width="1060" height="390" rx="8"/>
+  <text class="ink label" x="80" y="190">Hypothesis</text>
+<text class="ink label" x="300" y="190">UI behavior</text>
+<text class="ink label" x="565" y="190">API behavior</text>
+<text class="ink label" x="865" y="190">Verdict</text>
+  <path class="line" d="M80 216h1010"/>
+  <rect class="soft-amber" x="80" y="232" width="1010" height="68" rx="8"/>
+  <text class="ink label" x="80" y="270">Frontend</text>
+  <text class="ink small" x="300" y="270">Inline UI improves</text>
+  <text class="ink small" x="565" y="270">API remains inconsistent</text>
+  <text class="ink label" x="865" y="270">Partial</text>
+<rect class="soft-amber" x="80" y="328" width="1010" height="68" rx="8"/>
+  <text class="ink label" x="80" y="366">Backend</text>
+  <text class="ink small" x="300" y="366">UI still confusing</text>
+  <text class="ink small" x="565" y="366">Checkout error improves</text>
+  <text class="ink label" x="865" y="366">Partial</text>
+<rect class="soft-green" x="80" y="424" width="1010" height="68" rx="8"/>
+  <text class="ink label" x="80" y="462">Contract</text>
+  <text class="ink small" x="300" y="462">UI rejects invalid coupon</text>
+  <text class="ink small" x="565" y="462">API and UI agree</text>
+  <text class="ink label" x="865" y="462">Best</text>
+  <text class="muted small" x="80" y="604">The contract hypothesis wins because it removes the split-brain validation semantics.</text>
+</svg>

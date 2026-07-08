@@ -1,0 +1,6 @@
+node_modules/
+.env
+.env.*
+!.env.daytona.example
+.env.daytona.local
+logs/daytona-live-run.txt
