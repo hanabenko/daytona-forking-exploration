@@ -612,3 +612,13 @@
 - Screenshots captured: none.
 - Remaining TODOs: create the private GitHub repository, commit the prepared tree, and push after GitHub CLI authentication is refreshed.
 - Assumptions/blockers: `gh auth status` reports the saved GitHub token for `hanabenko` is invalid, so creating the private repository requires re-authenticating `gh` before upload.
+
+## Milestone 61: Created local initial Git commit; GitHub auth still blocked
+
+- What changed: staged the cleaned project tree, verified staged files did not include local credential files or dependencies, created the initial local commit on `main`, and attempted GitHub CLI device authentication for private repository creation.
+- Files created/modified: local Git commit `c2cfd1b` (`Initial Daytona forking demo`), `daytona-forking-coupon-demo/SUMMARY.md`.
+- Commands run: `git add .`; `git status --short`; `git diff --cached --name-only`; staged secret scan with `git grep --cached`; `git config --get user.name`; `git config --get user.email`; `git branch -M main`; `git commit -m "Initial Daytona forking demo"`; attempted `gh auth login -h github.com -s repo --web`; killed stuck interactive auth attempts; retried with piped input using `gh auth login --hostname github.com --git-protocol https --scopes repo --web`; `gh auth status`; `git log --oneline --decorate -1`.
+- Test results: initial commit succeeded with 146 files. Staged secret scan returned no matches for Daytona/OpenAI credential-shaped values. `git status --short` was clean after the initial commit. `gh auth status` still reports the `hanabenko` GitHub token is invalid.
+- Screenshots captured: none.
+- Remaining TODOs: re-authenticate GitHub CLI, then create and push the private repository.
+- Assumptions/blockers: the GitHub device login printed a one-time code but did not complete; it ended with a network reset while exchanging the OAuth token. No private GitHub repository was created yet.
