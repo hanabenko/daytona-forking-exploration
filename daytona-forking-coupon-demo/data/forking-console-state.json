@@ -1,6 +1,6 @@
 {
   "mode": "live",
-  "generatedAt": "2026-07-07T22:48:39.919Z",
+  "generatedAt": "2026-07-09T03:33:59.398Z",
   "headline": "Prepared parent sandbox branches into coupon debugging hypotheses.",
   "agentPattern": {
     "title": "Better fork point: after useful disk or memory state exists",
@@ -9,7 +9,7 @@
     "candidateFixState": [
       "src/shared/couponContract.js changed to validate against seeded coupon data",
       "debug-brief.md updated with the winning contract hypothesis",
-      ".artifacts/logs/failing-baseline.txt preserved for comparison",
+      "baseline failure reproduced once for comparison",
       "state-manifest.json records the prepared parent state",
       "fix-candidate.md explains why this branch should be reviewed",
       "optional memory-agent process warmed before the memory probe fork"
@@ -17,15 +17,15 @@
   },
   "liveRun": {
     "status": "complete",
-    "runId": "coupon-2026-07-07T22-47-37-439Z",
+    "runId": "coupon-2026-07-09T03-32-26-870Z",
     "apiKeyConfigured": true,
     "sdkInstalled": true,
-    "lastUpdated": "2026-07-07T22:48:39.919Z",
+    "lastUpdated": "2026-07-09T03:33:59.398Z",
     "logPath": ".artifacts/logs/daytona-live-run.txt",
     "latencyPath": ".artifacts/logs/daytona-live-latency.json",
     "blocker": null,
     "cleanup": "Cleanup completed; deleted 6 sandboxes.",
-    "parentSandboxId": "aa55a398-3715-40ec-920b-1c7391cfd6e3",
+    "parentSandboxId": "6cd8cebf-4efd-4d1e-bb04-6342fe1231c2",
     "target": "us-east-1",
     "baseSnapshot": "daytona-vm-medium",
     "createdSnapshot": "Not run in recording profile",
@@ -37,7 +37,7 @@
       "daytona-vm-ubuntu-xxl"
     ],
     "autoStopMinutes": 15,
-    "openAiCacheProbe": ".artifacts/logs/openai-cache-probe.json"
+    "openAiCacheProbe": "not included"
   },
   "parentState": [
     [
@@ -78,12 +78,12 @@
       "name": "coupon-parent-prepared",
       "kind": "parent",
       "status": "prepared live",
-      "sandboxId": "aa55a398-3715-40ec-920b-1c7391cfd6e3",
+      "sandboxId": "6cd8cebf-4efd-4d1e-bb04-6342fe1231c2",
       "summary": "Live Daytona parent contains prepared coupon state before fork.",
       "changedFiles": [
         "state-marker.txt",
         "debug-brief.md",
-        ".artifacts/logs/failing-baseline.txt"
+        "baseline failure note"
       ],
       "testStatus": "baseline failing log written",
       "verdict": "Ready to fork"
@@ -93,7 +93,7 @@
       "parent": "coupon-parent-prepared",
       "kind": "hypothesis",
       "status": "live fork",
-      "sandboxId": "d7c4a7bd-075d-433d-b232-ba72ea6e7f7b",
+      "sandboxId": "9708ab3e-efd1-48c1-a7d0-cf296698848d",
       "summary": "Live child fork wrote frontend-specific fork-note.txt.",
       "changedFiles": [
         "src/client/app.js"
@@ -106,7 +106,7 @@
       "parent": "coupon-parent-prepared",
       "kind": "hypothesis",
       "status": "live fork",
-      "sandboxId": "3842cbe8-4ba8-4b88-81a3-9371b52e92a5",
+      "sandboxId": "8430caf2-0a81-44dc-a4e0-463710f3ee1d",
       "summary": "Live child fork wrote backend-specific fork-note.txt.",
       "changedFiles": [
         "src/server/app.js"
@@ -119,7 +119,7 @@
       "parent": "coupon-parent-prepared",
       "kind": "hypothesis",
       "status": "live winning branch",
-      "sandboxId": "11227dcd-89e0-486f-9f8e-80460e7c0452",
+      "sandboxId": "d975cdef-1fe4-47bd-a3a1-71e35b325bbb",
       "summary": "Live child fork wrote contract-specific fork-note.txt.",
       "changedFiles": [
         "src/shared/couponContract.js",
@@ -133,7 +133,7 @@
       "parent": "contract-hypothesis",
       "kind": "refinement",
       "status": "live fork of fork",
-      "sandboxId": "9ff30904-9da3-4095-8b59-38378bc7524d",
+      "sandboxId": "144ae78b-009e-4f99-bfac-726ad70ae5e9",
       "summary": "Smallest correct shared contract fix.",
       "changedFiles": [
         "src/shared/couponContract.js"
@@ -146,7 +146,7 @@
       "parent": "contract-hypothesis",
       "kind": "refinement",
       "status": "live fork of fork",
-      "sandboxId": "1761a072-9a2b-45e5-b9d4-3706ad2b5986",
+      "sandboxId": "b4a4dfd5-4b76-4743-b651-563c646f5dca",
       "summary": "Shared fix plus explicit invalid coupon regression coverage.",
       "changedFiles": [
         "src/shared/couponContract.js",
@@ -165,12 +165,12 @@
         {
           "name": "coupon-parent-prepared",
           "parent": "base sandbox",
-          "sandboxId": "aa55a398-3715-40ec-920b-1c7391cfd6e3",
+          "sandboxId": "6cd8cebf-4efd-4d1e-bb04-6342fe1231c2",
           "status": "prepared live",
           "writes": [
             "state-marker.txt",
             "debug-brief.md",
-            ".artifacts/logs/failing-baseline.txt"
+            "baseline failure note"
           ],
           "inherits": [
             "base snapshot",
@@ -188,7 +188,7 @@
         {
           "name": "frontend-hypothesis",
           "parent": "coupon-parent-prepared",
-          "sandboxId": "d7c4a7bd-075d-433d-b232-ba72ea6e7f7b",
+          "sandboxId": "9708ab3e-efd1-48c1-a7d0-cf296698848d",
           "status": "live fork",
           "writes": [
             "src/client/app.js"
@@ -204,7 +204,7 @@
         {
           "name": "backend-hypothesis",
           "parent": "coupon-parent-prepared",
-          "sandboxId": "3842cbe8-4ba8-4b88-81a3-9371b52e92a5",
+          "sandboxId": "8430caf2-0a81-44dc-a4e0-463710f3ee1d",
           "status": "live fork",
           "writes": [
             "src/server/app.js"
@@ -220,7 +220,7 @@
         {
           "name": "contract-hypothesis",
           "parent": "coupon-parent-prepared",
-          "sandboxId": "11227dcd-89e0-486f-9f8e-80460e7c0452",
+          "sandboxId": "d975cdef-1fe4-47bd-a3a1-71e35b325bbb",
           "status": "live winning branch",
           "writes": [
             "src/shared/couponContract.js",
@@ -244,7 +244,7 @@
         {
           "name": "contract-candidate-fix",
           "parent": "contract-hypothesis",
-          "sandboxId": "11227dcd-89e0-486f-9f8e-80460e7c0452",
+          "sandboxId": "d975cdef-1fe4-47bd-a3a1-71e35b325bbb",
           "status": "candidate fix written",
           "writes": [
             "fix-candidate.md",
@@ -259,7 +259,7 @@
         {
           "name": "contract-minimal",
           "parent": "contract-hypothesis",
-          "sandboxId": "9ff30904-9da3-4095-8b59-38378bc7524d",
+          "sandboxId": "144ae78b-009e-4f99-bfac-726ad70ae5e9",
           "status": "live fork of fork",
           "writes": [
             "src/shared/couponContract.js"
@@ -273,7 +273,7 @@
         {
           "name": "contract-with-regression-test",
           "parent": "contract-hypothesis",
-          "sandboxId": "1761a072-9a2b-45e5-b9d4-3706ad2b5986",
+          "sandboxId": "b4a4dfd5-4b76-4743-b651-563c646f5dca",
           "status": "live fork of fork",
           "writes": [
             "src/shared/couponContract.js",
@@ -424,10 +424,10 @@
   },
   "forkEvents": [
     {
-      "at": "2026-07-07T22:47:39.944Z",
+      "at": "2026-07-09T03:32:29.380Z",
       "fork": "coupon-parent-prepared",
       "from": "base sandbox",
-      "sandboxId": "aa55a398-3715-40ec-920b-1c7391cfd6e3",
+      "sandboxId": "6cd8cebf-4efd-4d1e-bb04-6342fe1231c2",
       "parentSandboxId": null,
       "inheritedState": [
         "base snapshot",
@@ -438,11 +438,11 @@
       "status": "prepared"
     },
     {
-      "at": "2026-07-07T22:47:59.744Z",
+      "at": "2026-07-09T03:33:05.966Z",
       "fork": "frontend-hypothesis",
       "from": "coupon-parent-prepared",
-      "sandboxId": "d7c4a7bd-075d-433d-b232-ba72ea6e7f7b",
-      "parentSandboxId": "aa55a398-3715-40ec-920b-1c7391cfd6e3",
+      "sandboxId": "9708ab3e-efd1-48c1-a7d0-cf296698848d",
+      "parentSandboxId": "6cd8cebf-4efd-4d1e-bb04-6342fe1231c2",
       "inheritedState": [
         "repo files",
         "installed dependencies",
@@ -458,11 +458,11 @@
       "status": "forked"
     },
     {
-      "at": "2026-07-07T22:48:00.701Z",
+      "at": "2026-07-09T03:33:06.810Z",
       "fork": "backend-hypothesis",
       "from": "coupon-parent-prepared",
-      "sandboxId": "3842cbe8-4ba8-4b88-81a3-9371b52e92a5",
-      "parentSandboxId": "aa55a398-3715-40ec-920b-1c7391cfd6e3",
+      "sandboxId": "8430caf2-0a81-44dc-a4e0-463710f3ee1d",
+      "parentSandboxId": "6cd8cebf-4efd-4d1e-bb04-6342fe1231c2",
       "inheritedState": [
         "repo files",
         "installed dependencies",
@@ -478,11 +478,11 @@
       "status": "forked"
     },
     {
-      "at": "2026-07-07T22:48:01.707Z",
+      "at": "2026-07-09T03:33:07.776Z",
       "fork": "contract-hypothesis",
       "from": "coupon-parent-prepared",
-      "sandboxId": "11227dcd-89e0-486f-9f8e-80460e7c0452",
-      "parentSandboxId": "aa55a398-3715-40ec-920b-1c7391cfd6e3",
+      "sandboxId": "d975cdef-1fe4-47bd-a3a1-71e35b325bbb",
+      "parentSandboxId": "6cd8cebf-4efd-4d1e-bb04-6342fe1231c2",
       "inheritedState": [
         "repo files",
         "installed dependencies",
@@ -498,11 +498,11 @@
       "status": "forked"
     },
     {
-      "at": "2026-07-07T22:48:22.118Z",
+      "at": "2026-07-09T03:33:38.039Z",
       "fork": "contract-minimal",
       "from": "contract-hypothesis",
-      "sandboxId": "9ff30904-9da3-4095-8b59-38378bc7524d",
-      "parentSandboxId": "11227dcd-89e0-486f-9f8e-80460e7c0452",
+      "sandboxId": "144ae78b-009e-4f99-bfac-726ad70ae5e9",
+      "parentSandboxId": "d975cdef-1fe4-47bd-a3a1-71e35b325bbb",
       "inheritedState": [
         "repo files",
         "installed dependencies",
@@ -520,11 +520,11 @@
       "status": "forked"
     },
     {
-      "at": "2026-07-07T22:48:23.298Z",
+      "at": "2026-07-09T03:33:39.058Z",
       "fork": "contract-with-regression-test",
       "from": "contract-hypothesis",
-      "sandboxId": "1761a072-9a2b-45e5-b9d4-3706ad2b5986",
-      "parentSandboxId": "11227dcd-89e0-486f-9f8e-80460e7c0452",
+      "sandboxId": "b4a4dfd5-4b76-4743-b651-563c646f5dca",
+      "parentSandboxId": "d975cdef-1fe4-47bd-a3a1-71e35b325bbb",
       "inheritedState": [
         "repo files",
         "installed dependencies",

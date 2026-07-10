@@ -10,3 +10,12 @@ __pycache__/
 !.env.*.example
 
 node_modules/
+
+# Demo package outputs
+/daytona-forking-coupon-demo/.artifacts/
+/daytona-forking-coupon-demo/dist/
+/daytona-forking-coupon-demo/runs/
+/daytona-forking-coupon-demo/.env
+/daytona-forking-coupon-demo/.env.*
+!/daytona-forking-coupon-demo/.env.daytona.example
+/daytona-forking-coupon-demo/.env.daytona.local

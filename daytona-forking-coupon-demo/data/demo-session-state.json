@@ -1,27 +1,13 @@
 {
-  "bugReproduced": true,
+  "bugReproduced": false,
   "invalidCoupon": "SUMMER-2026",
-  "uiAcceptedInvalidCoupon": true,
-  "checkoutFailedGenerically": true,
-  "fixApplied": true,
-  "fixedAt": "2026-07-07T22:48:39.945Z",
-  "winningHypothesis": "contract-hypothesis",
-  "fixedCouponMessage": "Invalid coupon code",
-  "fixedCheckoutMessage": "Blocked before checkout by the shared coupon contract.",
-  "reproducedAt": "2026-07-07T22:47:24.048Z",
-  "events": [
-    {
-      "type": "coupon-bug-reproduced",
-      "at": "2026-07-07T22:47:24.048Z",
-      "invalidCoupon": "SUMMER-2026",
-      "uiAcceptedInvalidCoupon": true,
-      "checkoutFailedGenerically": true,
-      "checkoutError": "Checkout failed. Please try another payment method."
-    },
-    {
-      "type": "coupon-fix-applied",
-      "at": "2026-07-07T22:48:39.945Z",
-      "winningHypothesis": "contract-hypothesis"
-    }
-  ]
+  "uiAcceptedInvalidCoupon": false,
+  "checkoutFailedGenerically": false,
+  "fixApplied": false,
+  "fixedAt": null,
+  "winningHypothesis": null,
+  "fixedCouponMessage": null,
+  "fixedCheckoutMessage": null,
+  "reproducedAt": null,
+  "events": []
 }

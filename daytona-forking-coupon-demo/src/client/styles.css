@@ -38,8 +38,7 @@ input {
   grid-template-columns: minmax(280px, 0.92fr) minmax(360px, 520px);
   gap: 36px;
   align-items: start;
-  max-width: 1120px;
-  margin: 0 auto;
+  width: 100%;
 }
 
 .repro-workbench {
@@ -50,19 +49,20 @@ input {
   margin-top: 16px;
 }
 
-.unified-console .repro-workbench {
-  grid-template-columns: 1fr;
-}
-
 .unified-console .topbar nav {
   display: none;
 }
 
 .unified-console .checkout {
-  max-width: 1120px;
-  margin: 0 auto;
+  width: 100%;
+  max-width: none;
+  margin: 0;
   grid-template-columns: minmax(260px, 0.82fr) minmax(340px, 420px);
   gap: 24px;
+}
+
+.unified-console .repro-workbench {
+  grid-template-columns: 1fr;
 }
 
 .unified-console .start-panel {
