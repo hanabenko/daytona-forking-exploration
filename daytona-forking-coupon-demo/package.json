@@ -8,6 +8,9 @@
     "dev": "node src/server/index.js",
     "build": "node scripts/build.js",
     "seed": "node scripts/seed.js",
+    "demo:reset": "node scripts/demo-reset.js",
+    "demo:codex": "node scripts/daytona-live-demo.js --plan",
+    "demo:codex:live": "node scripts/daytona-live-demo.js --live --no-openai-cache",
     "daytona:check": "node scripts/daytona-live-demo.js --check",
     "daytona:plan": "node scripts/daytona-live-demo.js --plan",
     "daytona:live": "node scripts/daytona-live-demo.js --live"

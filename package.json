@@ -6,6 +6,9 @@
     "dev": "npm --prefix daytona-forking-coupon-demo run dev",
     "build": "npm --prefix daytona-forking-coupon-demo run build",
     "seed": "npm --prefix daytona-forking-coupon-demo run seed",
+    "demo:reset": "npm --prefix daytona-forking-coupon-demo run demo:reset",
+    "demo:codex": "npm --prefix daytona-forking-coupon-demo run demo:codex",
+    "demo:codex:live": "npm --prefix daytona-forking-coupon-demo run demo:codex:live",
     "daytona:check": "npm --prefix daytona-forking-coupon-demo run daytona:check",
     "daytona:plan": "npm --prefix daytona-forking-coupon-demo run daytona:plan",
     "daytona:live": "npm --prefix daytona-forking-coupon-demo run daytona:live"

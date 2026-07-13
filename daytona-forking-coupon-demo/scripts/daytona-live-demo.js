@@ -168,7 +168,7 @@ async function measure(metrics, operation, fn) {
 }
 
 function shouldPauseSteps() {
-  return stepPauseRequested && !noStepPause && process.stdin.isTTY;
+  return !noStepPause && process.stdin.isTTY && (stepPauseRequested || live);
 }
 
 async function explainStep(title, lines, options = {}) {
@@ -185,7 +185,7 @@ async function explainStep(title, lines, options = {}) {
   appendLog(rendered.join("\n"));
 
   if (pause && shouldPauseSteps()) {
-    const prompt = "[continue] Press Enter to start the next Daytona step.";
+    const prompt = "[continue] Press Enter to reveal the next Daytona step.";
     console.log(prompt);
     appendLog(prompt);
     const rl = createInterface({ input, output });
@@ -829,6 +829,7 @@ async function runLive() {
           prompt: process.env.CODEX_FORK_PROMPT
         });
 
+  mkdirSync(projectPath("logs"), { recursive: true });
   writeFileSync(logPath, "");
   appendLog(`Starting Daytona live run ${runId}`);
   appendLog(`Effective target: ${target ?? "Daytona default"}`);
@@ -840,6 +841,7 @@ async function runLive() {
   const metrics = [];
   activeMetrics = metrics;
   writeLatencyReport(metrics);
+  console.log("Interactive mode: press Enter at each [continue] prompt to advance the demo.");
   updateLiveState({
     mode: "live",
     liveRun: {
